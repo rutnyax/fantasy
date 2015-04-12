@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
+
+<%@ include file="../layout/taglib.jsp" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +9,6 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <title><tiles:getAsString name="title" /></title>
 
 <link rel="stylesheet"
@@ -20,8 +20,6 @@
     <![endif]-->
 </head>
 <body>
-
-<%@ taglib uri="http://tiles.apache.org/tags-tiles-extras" prefix="tilesx" %>
 
 <tilesx:useAttribute name="current"/>
 
