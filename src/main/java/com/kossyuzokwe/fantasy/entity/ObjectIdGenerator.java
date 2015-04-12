@@ -12,7 +12,8 @@ public class ObjectIdGenerator implements IdentifierGenerator {
 	@Override
 	public Serializable generate(SessionImplementor session, Object object)
 			throws HibernateException {
-		return new ObjectId();
+		ObjectId id = ObjectId.get();
+		return id.toString();
 	}
 
 }
