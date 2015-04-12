@@ -21,6 +21,10 @@
 </head>
 <body>
 
+<%@ taglib uri="http://tiles.apache.org/tags-tiles-extras" prefix="tilesx" %>
+
+<tilesx:useAttribute name="current"/>
+
 	<div class="container">
 		<!-- 		<nav class="navbar navbar-default navbar-fixed-top"> -->
 		<!-- 		<nav class="navbar navbar-default navbar-static-top"> -->
@@ -41,8 +45,8 @@
 				<div class="collapse navbar-collapse"
 					id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
-						<li class="active"><a href='<spring:url value="/" />'>Home</a></li>
-						<li><a href='<spring:url value="/users.html" />'>Users</a></li>
+						<li class="${current == 'index' ? 'active' : ''}"><a href='<spring:url value="/" />'>Home</a></li>
+						<li class="${current == 'users' ? 'active' : ''}"><a href='<spring:url value="/users.html" />'>Users</a></li>
 						<li><a href="#">Link</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
@@ -67,8 +71,8 @@
 
 		<tiles:insertAttribute name="body" />
 	</div>
-<!-- 		<br> -->
-		<tiles:insertAttribute name="footer" />
+	<!-- 		<br> -->
+	<tiles:insertAttribute name="footer" />
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<script
 		src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
