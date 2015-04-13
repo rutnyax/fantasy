@@ -19,6 +19,7 @@ import com.kossyuzokwe.fantasy.repository.UserRepository;
 import com.kossyuzokwe.fantasy.util.Constants;
 
 @Service
+@Transactional
 public class UserService {
 
 	@Autowired
@@ -41,7 +42,6 @@ public class UserService {
 		return userRepository.findOne(id);
 	}
 
-	@Transactional
 	public User findOneWithTeams(String id) {
 		User user = findOne(id);
 		List<Team> teams = teamRepository.findByUser(user, new PageRequest(0, Constants.STANDARD_PAGE_SIZE, Direction.DESC, "teamId"));
@@ -51,5 +51,9 @@ public class UserService {
 		}
 		user.setTeams(teams);
 		return user;
+	}
+
+	public void save(User user) {
+		userRepository.save(user);
 	}
 }
