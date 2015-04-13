@@ -15,9 +15,12 @@
 
 	<authentication-manager>
 		<authentication-provider>
-			<user-service>
-				<user name="admin" password="admin" authorities="ROLE_USER, ROLE_ADMIN" />
-			</user-service>
+			<jdbc-user-service data-source-ref="dataSource"
+				authorities-by-username-query='select "user".user_name, role.role_name from "user" 
+												join user_role on "user".user_id = user_role.users_user_id 
+												join role on user_role.roles_role_id = role.role_id 
+												where "user".user_name = ?'
+				users-by-username-query='select user_name, user_password, 1 from "user" where user_name = ?' />
 		</authentication-provider>
 	</authentication-manager>
 
