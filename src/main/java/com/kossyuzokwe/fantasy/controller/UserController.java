@@ -1,5 +1,7 @@
 package com.kossyuzokwe.fantasy.controller;
 
+import java.security.Principal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,7 +32,7 @@ public class UserController {
 
 	@RequestMapping("/users/{id}")
 	public String userDetail(Model model, @PathVariable String id) {
-		model.addAttribute("user", userService.findOneWithTeams(id));
+		model.addAttribute("user", userService.findOneWithTeamsById(id));
 		return "user-detail";
 	}
 	
@@ -43,5 +45,12 @@ public class UserController {
 	public String doRegister(@ModelAttribute("user") User user) {
 		userService.save(user);
 		return "redirect:/register.html?success=true";
+	}
+	
+	@RequestMapping("/account")
+	public String account(Model model, Principal principal){
+		String name = principal.getName();
+		model.addAttribute("user", userService.findOneWithTeamsByName(name));
+		return "user-detail";
 	}
 }

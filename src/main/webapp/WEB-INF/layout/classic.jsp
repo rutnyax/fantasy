@@ -45,31 +45,35 @@
 					<ul class="nav navbar-nav">
 						<li class="${current == 'index' ? 'active' : ''}"><a
 							href='<spring:url value="/" />'>Home</a></li>
-					<security:authorize access="hasRole('ROLE_ADMIN')">
-						<li class="${current == 'users' ? 'active' : ''}"><a
-							href='<spring:url value="/users.html" />'>Users</a></li></security:authorize>
+						<security:authorize access="hasRole('ROLE_ADMIN')">
+							<li class="${current == 'users' ? 'active' : ''}"><a
+								href='<spring:url value="/users.html" />'>Users</a></li>
+						</security:authorize>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
-					<security:authorize access="isAnonymous()">
-						<li class="${current == 'register' ? 'active' : ''}"><a
-							href='<spring:url value="/register.html" />'>Register</a></li>
-						<li class="${current == 'login' ? 'active' : ''}"><a
-							href='<spring:url value="/login.html" />'>Login</a></li></security:authorize>
-							<security:authorize access="isAuthenticated()">
-						<li class="dropdown ${current == 'account' ? 'active' : ''}"><a href="#" class="dropdown-toggle"
-							data-toggle="dropdown" role="button" aria-expanded="false">Account
-								<span class="caret"></span>
-						</a>
-							<ul class="dropdown-menu" role="menu">
-								<li><a href="#">Edit Profile</a></li>
-								<li class="divider"></li>
-								<li><c:url var="logoutUrl" value="/logout" />
-									<form name="f" action="${logoutUrl}" method="post">
-<!-- 										<input type="submit" value="Log out" />  -->
-										<input type="hidden"
-											name="${_csrf.parameterName}" value="${_csrf.token}" />
-									</form><a href="#" onclick="document.f.submit()">Log out</a></li>
-							</ul></li></security:authorize>
+						<security:authorize access="isAnonymous()">
+							<li class="${current == 'register' ? 'active' : ''}"><a
+								href='<spring:url value="/register.html" />'>Register</a></li>
+							<li class="${current == 'login' ? 'active' : ''}"><a
+								href='<spring:url value="/login.html" />'>Login</a></li>
+						</security:authorize>
+						<security:authorize access="isAuthenticated()">
+							<li class="dropdown ${current == 'account' ? 'active' : ''}"><a
+								href="#" class="dropdown-toggle" data-toggle="dropdown"
+								role="button" aria-expanded="false">Me <span class="caret"></span>
+							</a>
+								<ul class="dropdown-menu" role="menu">
+									<li><a href='<spring:url value="/account.html" />'>Account</a></li>
+									<li><a href="#">Edit Profile</a></li>
+									<li class="divider"></li>
+									<li><c:url var="logoutUrl" value="/logout" />
+										<form name="f" action="${logoutUrl}" method="post">
+											<input type="hidden" name="${_csrf.parameterName}"
+												value="${_csrf.token}" />
+										</form>
+										<a href="#" onclick="document.f.submit()">Log out</a></li>
+								</ul></li>
+						</security:authorize>
 					</ul>
 				</div>
 				<!-- /.navbar-collapse -->

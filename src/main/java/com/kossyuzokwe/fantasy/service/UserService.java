@@ -49,7 +49,7 @@ public class UserService {
 		return userRepository.findOne(id);
 	}
 
-	public User findOneWithTeams(String id) {
+	public User findOneWithTeamsById(String id) {
 		User user = findOne(id);
 		List<Team> teams = teamRepository.findByUser(user, new PageRequest(0, Constants.STANDARD_PAGE_SIZE, Direction.DESC, "teamId"));
 		for (Team team : teams) {
@@ -68,5 +68,10 @@ public class UserService {
 		roles.add(roleRepository.findByRoleName("ROLE_USER"));
 		user.setRoles(roles);
 		userRepository.save(user);
+	}
+
+	public User findOneWithTeamsByName(String username) {
+		User user = userRepository.findByUserName(username);
+		return findOneWithTeamsById(user.getUserId());
 	}
 }

@@ -6,4 +6,6 @@ import com.kossyuzokwe.fantasy.entity.User;
 
 public interface UserRepository extends JpaRepository<User, String>{
 
+	User findByUserName(String username);
+
 }
