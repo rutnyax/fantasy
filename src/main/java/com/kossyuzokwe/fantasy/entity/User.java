@@ -32,6 +32,9 @@ public class User {
 	@Column(name = "user_password")
 	private String userPassword;
 
+	@Column(name = "user_enabled")
+	private boolean userEnabled;
+
 	@ManyToMany
 	@JoinTable
 	private List<Role> roles;
@@ -96,5 +99,13 @@ public class User {
 
 	public void setLeaguesOwned(List<League> leaguesOwned) {
 		this.leaguesOwned = leaguesOwned;
+	}
+
+	public boolean isUserEnabled() {
+		return userEnabled;
+	}
+
+	public void setUserEnabled(boolean userEnabled) {
+		this.userEnabled = userEnabled;
 	}
 }
