@@ -62,8 +62,12 @@
 								<li><a href="#">Another action</a></li>
 								<li><a href="#">Something else here</a></li>
 								<li class="divider"></li>
-						<li><a
-							href='<spring:url value="/logout.html" />'>Logout</a></li>
+								<li><c:url var="logoutUrl" value="/logout" />
+									<form name="f" action="${logoutUrl}" method="post">
+<!-- 										<input type="submit" value="Log out" />  -->
+										<input type="hidden"
+											name="${_csrf.parameterName}" value="${_csrf.token}" />
+									</form><a href="#" onclick="document.f.submit()">Log out</a></li>
 							</ul></li>
 					</ul>
 				</div>
@@ -74,7 +78,7 @@
 
 		<tiles:insertAttribute name="body" />
 	</div>
-	<!-- 		<br> -->
+
 	<tiles:insertAttribute name="footer" />
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<script
