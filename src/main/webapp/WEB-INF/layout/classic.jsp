@@ -51,7 +51,8 @@
 							href='<spring:url value="/register.html" />'>Register</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="#">Link</a></li>
+						<li class="${current == 'login' ? 'active' : ''}"><a
+							href='<spring:url value="/login.html" />'>Login</a></li>
 						<li class="dropdown"><a href="#" class="dropdown-toggle"
 							data-toggle="dropdown" role="button" aria-expanded="false">Dropdown
 								<span class="caret"></span>
@@ -61,7 +62,8 @@
 								<li><a href="#">Another action</a></li>
 								<li><a href="#">Something else here</a></li>
 								<li class="divider"></li>
-								<li><a href="#">Separated link</a></li>
+						<li><a
+							href='<spring:url value="/logout.html" />'>Logout</a></li>
 							</ul></li>
 					</ul>
 				</div>

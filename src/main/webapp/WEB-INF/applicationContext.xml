@@ -22,6 +22,8 @@
 	<jpa:repositories base-package="com.kossyuzokwe.fantasy.repository"
 		entity-manager-factory-ref="emf" />
 
+	<import resource="security.xml" />
+
 	<beans profile="default">
 		<import resource="database-dev.xml" />
 	</beans>

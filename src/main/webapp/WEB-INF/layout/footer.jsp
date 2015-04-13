@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 
 <style>
+<!--
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
@@ -26,15 +27,16 @@ body {
 /* Custom page CSS
 -------------------------------------------------- */
 /* Not required for template or sticky footer method. */
-
 .container {
-  width: auto;
-  max-width: 680px;
-  padding: 0 15px;
+	width: auto;
+	max-width: 680px;
+	padding: 0 15px;
 }
+
 .container .text-muted {
-  margin: 20px 0;
+	margin: 20px 0;
 }
+-->
 </style>
 
 <footer class="footer">
