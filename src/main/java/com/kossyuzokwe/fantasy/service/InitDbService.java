@@ -7,6 +7,7 @@ import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.kossyuzokwe.fantasy.entity.League;
@@ -45,6 +46,8 @@ public class InitDbService {
 
 	@PostConstruct
 	public void init() {
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		
 		Role roleUser = new Role();
 		roleUser.setRoleName("ROLE_USER");
 		roleRepository.save(roleUser);
@@ -55,7 +58,8 @@ public class InitDbService {
 
 		User userAdmin = new User();
 		userAdmin.setUserName("admin");
-		userAdmin.setUserPassword("admin");
+		userAdmin.setUserEmail("admin@admin.com");
+		userAdmin.setUserPassword(encoder.encode("admin"));
 		List<Role> roles = new ArrayList<Role>();
 		roles.add(roleUser);
 		roles.add(roleAdmin);
@@ -82,5 +86,34 @@ public class InitDbService {
 		playerTerry.setPlayerName("John Terry");
 		playerTerry.setTeam(teamChelsea);
 		playerRepository.save(playerTerry);
+		
+		Role roleUser2 = new Role();
+		roleUser2.setRoleName("ROLE_USER");
+		roleRepository.save(roleUser2);
+
+		User userNotAdmin = new User();
+		userNotAdmin.setUserName("test");
+		userNotAdmin.setUserEmail("test@test.com");
+		userNotAdmin.setUserPassword(encoder.encode("test"));
+		List<Role> roles2 = new ArrayList<Role>();
+		roles2.add(roleUser2);
+		userNotAdmin.setRoles(roles2);
+		userRepository.save(userNotAdmin);
+
+		Team teamArsenal = new Team();
+		teamArsenal.setTeamName("Arsenal");
+		teamArsenal.setUser(userNotAdmin);
+		teamArsenal.setLeague(premierLeague);
+		teamRepository.save(teamArsenal);
+
+		Player playerSanchez = new Player();
+		playerSanchez.setPlayerName("Alexis Sanchez");
+		playerSanchez.setTeam(teamArsenal);
+		playerRepository.save(playerSanchez);
+
+		Player playerWalcott = new Player();
+		playerWalcott.setPlayerName("Theo Walcott");
+		playerWalcott.setTeam(teamArsenal);
+		playerRepository.save(playerWalcott);
 	}
 }
