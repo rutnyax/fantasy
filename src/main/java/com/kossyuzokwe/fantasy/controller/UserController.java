@@ -19,10 +19,10 @@ public class UserController {
 		model.addAttribute("users", userService.findAll());
 		return "users";
 	}
-	
+
 	@RequestMapping("/users/{id}")
 	public String userDetail(Model model, @PathVariable String id) {
-		model.addAttribute("user", userService.findOne(id));
+		model.addAttribute("user", userService.findOneWithTeams(id));
 		return "user-detail";
 	}
 }

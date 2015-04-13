@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<%@ include file="../layout/taglib.jsp" %>
+<%@ include file="../layout/taglib.jsp"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,7 +21,7 @@
 </head>
 <body>
 
-<tilesx:useAttribute name="current"/>
+	<tilesx:useAttribute name="current" />
 
 	<div class="container">
 		<!-- 		<nav class="navbar navbar-default navbar-fixed-top"> -->
@@ -43,8 +43,10 @@
 				<div class="collapse navbar-collapse"
 					id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
-						<li class="${current == 'index' ? 'active' : ''}"><a href='<spring:url value="/" />'>Home</a></li>
-						<li class="${current == 'users' ? 'active' : ''}"><a href='<spring:url value="/users.html" />'>Users</a></li>
+						<li class="${current == 'index' ? 'active' : ''}"><a
+							href='<spring:url value="/" />'>Home</a></li>
+						<li class="${current == 'users' ? 'active' : ''}"><a
+							href='<spring:url value="/users.html" />'>Users</a></li>
 						<li><a href="#">Link</a></li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
