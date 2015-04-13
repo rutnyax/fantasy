@@ -57,6 +57,7 @@ public class InitDbService {
 		roleRepository.save(roleAdmin);
 
 		User userAdmin = new User();
+		userAdmin.setUserEnabled(true);
 		userAdmin.setUserName("admin");
 		userAdmin.setUserEmail("admin@admin.com");
 		userAdmin.setUserPassword(encoder.encode("admin"));
@@ -86,17 +87,14 @@ public class InitDbService {
 		playerTerry.setPlayerName("John Terry");
 		playerTerry.setTeam(teamChelsea);
 		playerRepository.save(playerTerry);
-		
-		Role roleUser2 = new Role();
-		roleUser2.setRoleName("ROLE_USER");
-		roleRepository.save(roleUser2);
 
 		User userNotAdmin = new User();
+		userNotAdmin.setUserEnabled(true);
 		userNotAdmin.setUserName("test");
 		userNotAdmin.setUserEmail("test@test.com");
 		userNotAdmin.setUserPassword(encoder.encode("test"));
 		List<Role> roles2 = new ArrayList<Role>();
-		roles2.add(roleUser2);
+		roles2.add(roleUser);
 		userNotAdmin.setRoles(roles2);
 		userRepository.save(userNotAdmin);
 

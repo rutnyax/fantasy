@@ -1,5 +1,6 @@
 package com.kossyuzokwe.fantasy.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -7,13 +8,16 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.kossyuzokwe.fantasy.entity.Player;
+import com.kossyuzokwe.fantasy.entity.Role;
 import com.kossyuzokwe.fantasy.entity.Team;
 import com.kossyuzokwe.fantasy.entity.User;
 import com.kossyuzokwe.fantasy.repository.LeagueRepository;
 import com.kossyuzokwe.fantasy.repository.PlayerRepository;
+import com.kossyuzokwe.fantasy.repository.RoleRepository;
 import com.kossyuzokwe.fantasy.repository.TeamRepository;
 import com.kossyuzokwe.fantasy.repository.UserRepository;
 import com.kossyuzokwe.fantasy.util.Constants;
@@ -24,6 +28,9 @@ public class UserService {
 
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+	private RoleRepository roleRepository;
 	
 	@Autowired
 	private TeamRepository teamRepository;
@@ -54,6 +61,12 @@ public class UserService {
 	}
 
 	public void save(User user) {
+		user.setUserEnabled(true);
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		user.setUserPassword(encoder.encode(user.getUserPassword()));
+		List<Role> roles = new ArrayList<Role>();
+		roles.add(roleRepository.findByRoleName("ROLE_USER"));
+		user.setRoles(roles);
 		userRepository.save(user);
 	}
 }

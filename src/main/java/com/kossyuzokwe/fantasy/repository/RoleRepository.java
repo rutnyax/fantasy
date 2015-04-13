@@ -6,4 +6,6 @@ import com.kossyuzokwe.fantasy.entity.Role;
 
 public interface RoleRepository extends JpaRepository<Role, String>{
 
+	Role findByRoleName(String roleName);
+
 }
