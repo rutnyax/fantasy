@@ -3,7 +3,9 @@
 
 <%@ include file="../layout/taglib.jsp"%>
 
-<h1>${user.userName}</h1>
+<h1>
+	<c:out value='${user.userName}' />
+</h1>
 
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary btn-lg" data-toggle="modal"
@@ -52,11 +54,13 @@
 
 <c:forEach items="${user.teams}" var="team">
 
-	<h1>${team.teamName}</h1>
+	<h1>
+		<c:out value='${team.teamName}' />
+	</h1>
 	<p>
 		<a href='<spring:url value="/team/remove/${team.teamId}.html" />'
 			class="btn btn-danger triggerRemove">Delete Team</a>
-		${team.league.leagueName}
+		<c:out value='${team.league.leagueName}' />
 	</p>
 
 	<!-- 	<table -->
@@ -71,8 +75,8 @@
 		<tbody>
 			<c:forEach items="${team.players}" var="player">
 				<tr>
-					<td>${player.playerId}</td>
-					<td>${player.playerName}</td>
+					<td><c:out value='${player.playerId}' /></td>
+					<td><c:out value='${player.playerName}' /></td>
 				</tr>
 			</c:forEach>
 		</tbody>

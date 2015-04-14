@@ -68,8 +68,6 @@
 	<!-- 		</label> -->
 	<!-- 	</div> -->
 	<input name="submit" type="submit" value="Sign in"
-		class="btn btn-lg btn-primary btn-block" />
-	<!-- 	<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button> -->
-	<input type="hidden" name="${_csrf.parameterName}"
-		value="${_csrf.token}" />
+		class="btn btn-lg btn-primary btn-block" /> <input type="hidden"
+		name="${_csrf.parameterName}" value="${_csrf.token}" />
 </form>
