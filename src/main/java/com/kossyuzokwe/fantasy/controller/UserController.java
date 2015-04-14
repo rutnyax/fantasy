@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.kossyuzokwe.fantasy.entity.Team;
 import com.kossyuzokwe.fantasy.entity.User;
+import com.kossyuzokwe.fantasy.service.TeamService;
 import com.kossyuzokwe.fantasy.service.UserService;
 
 @Controller
@@ -19,9 +21,17 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
+	@Autowired
+	private TeamService teamService;
+	
 	@ModelAttribute("user")
 	public User constructUser() {
 		return new User();
+	}
+	
+	@ModelAttribute("team")
+	public Team constructTeam(){
+		return new Team();
 	}
 
 	@RequestMapping("/users")
@@ -52,5 +62,12 @@ public class UserController {
 		String name = principal.getName();
 		model.addAttribute("user", userService.findOneWithTeamsByName(name));
 		return "user-detail";
+	}
+	
+	@RequestMapping(value="/account", method=RequestMethod.POST)
+	public String createTeam(@ModelAttribute("team") Team team, Principal principal){
+		String name = principal.getName();
+		teamService.save(team, name);
+		return "redirect:/account.html";
 	}
 }
