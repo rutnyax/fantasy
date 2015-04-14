@@ -1,9 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="ISO-8859-1"%>
 
 <style>
-<!--
-/* Sticky footer styles
+<!-- /* Sticky footer styles
 -------------------------------------------------- */
 html {
 	position: relative;
