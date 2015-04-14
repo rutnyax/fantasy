@@ -47,7 +47,7 @@ public class InitDbService {
 	@PostConstruct
 	public void init() {
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		
+
 		Role roleUser = new Role();
 		roleUser.setRoleName("ROLE_USER");
 		roleRepository.save(roleUser);

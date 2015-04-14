@@ -2,6 +2,7 @@ package com.kossyuzokwe.fantasy.entity;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -30,7 +31,7 @@ public class Team {
 	@JoinColumn(name = "user_id")
 	private User user;
 
-	@OneToMany(mappedBy = "team")
+	@OneToMany(mappedBy = "team", cascade = CascadeType.REMOVE)
 	private List<Player> players;
 
 	@ManyToOne

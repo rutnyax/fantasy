@@ -30,4 +30,8 @@ public class TeamService {
 		team.setUser(user);
 		teamRepository.save(team);
 	}
+
+	public void delete(String id) {
+		teamRepository.delete(id);
+	}
 }

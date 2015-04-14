@@ -28,16 +28,16 @@ public class UserService {
 
 	@Autowired
 	private UserRepository userRepository;
-	
+
 	@Autowired
 	private RoleRepository roleRepository;
-	
+
 	@Autowired
 	private TeamRepository teamRepository;
-	
+
 	@Autowired
 	private PlayerRepository playerRepository;
-	
+
 	@Autowired
 	private LeagueRepository leagueRepository;
 
@@ -51,9 +51,12 @@ public class UserService {
 
 	public User findOneWithTeamsById(String id) {
 		User user = findOne(id);
-		List<Team> teams = teamRepository.findByUser(user, new PageRequest(0, Constants.STANDARD_PAGE_SIZE, Direction.DESC, "teamId"));
+		List<Team> teams = teamRepository.findByUser(user, new PageRequest(0,
+				Constants.STANDARD_PAGE_SIZE, Direction.DESC, "teamId"));
 		for (Team team : teams) {
-			List<Player> players = playerRepository.findByTeam(team, new PageRequest(0, Constants.STANDARD_PAGE_SIZE, Direction.DESC, "playerId"));
+			List<Player> players = playerRepository.findByTeam(team,
+					new PageRequest(0, Constants.STANDARD_PAGE_SIZE,
+							Direction.DESC, "playerId"));
 			team.setPlayers(players);
 		}
 		user.setTeams(teams);
@@ -73,5 +76,9 @@ public class UserService {
 	public User findOneWithTeamsByName(String username) {
 		User user = userRepository.findByUserName(username);
 		return findOneWithTeamsById(user.getUserId());
+	}
+
+	public void delete(String id) {
+		userRepository.delete(id);
 	}
 }

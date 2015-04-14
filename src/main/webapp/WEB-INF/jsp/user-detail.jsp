@@ -43,10 +43,14 @@
 <c:forEach items="${user.teams}" var="team">
 
 	<h1>${team.teamName}</h1>
-	<p>${team.league.leagueName}</p>
+	<p>
+		<a href='<spring:url value="/team/remove/${team.teamId}.html" />'
+			class="btn btn-danger">Delete Team</a> ${team.league.leagueName}
+	</p>
 
-	<table
-		class="table table-striped table-bordered table-hover table-condensed">
+	<!-- 	<table -->
+	<!-- 		class="table table-striped table-bordered table-hover table-condensed"> -->
+	<table class="table table-striped table-bordered table-hover">
 		<thead>
 			<tr>
 				<th>ID</th>

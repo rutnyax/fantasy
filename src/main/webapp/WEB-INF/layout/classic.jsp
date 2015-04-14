@@ -70,8 +70,7 @@
 										<form name="f" action="${logoutUrl}" method="post">
 											<input type="hidden" name="${_csrf.parameterName}"
 												value="${_csrf.token}" />
-										</form>
-										<a href="#" onclick="document.f.submit()">Log out</a></li>
+										</form> <a href="#" onclick="document.f.submit()">Log out</a></li>
 								</ul></li>
 						</security:authorize>
 					</ul>

@@ -20,17 +20,17 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
-	
+
 	@Autowired
 	private TeamService teamService;
-	
+
 	@ModelAttribute("user")
 	public User constructUser() {
 		return new User();
 	}
-	
+
 	@ModelAttribute("team")
-	public Team constructTeam(){
+	public Team constructTeam() {
 		return new Team();
 	}
 
@@ -45,29 +45,42 @@ public class UserController {
 		model.addAttribute("user", userService.findOneWithTeamsById(id));
 		return "user-detail";
 	}
-	
+
 	@RequestMapping("/register")
 	public String showRegister() {
 		return "user-register";
 	}
-	
-	@RequestMapping(value="/register", method=RequestMethod.POST)
+
+	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public String doRegister(@ModelAttribute("user") User user) {
 		userService.save(user);
 		return "redirect:/register.html?success=true";
 	}
-	
+
 	@RequestMapping("/account")
-	public String account(Model model, Principal principal){
+	public String account(Model model, Principal principal) {
 		String name = principal.getName();
 		model.addAttribute("user", userService.findOneWithTeamsByName(name));
 		return "user-detail";
 	}
-	
-	@RequestMapping(value="/account", method=RequestMethod.POST)
-	public String createTeam(@ModelAttribute("team") Team team, Principal principal){
+
+	@RequestMapping(value = "/account", method = RequestMethod.POST)
+	public String createTeam(@ModelAttribute("team") Team team,
+			Principal principal) {
 		String name = principal.getName();
 		teamService.save(team, name);
 		return "redirect:/account.html";
+	}
+
+	@RequestMapping("/team/remove/{id}")
+	public String removeTeam(@PathVariable String id) {
+		teamService.delete(id);
+		return "redirect:/account.html";
+	}
+
+	@RequestMapping("/users/remove/{id}")
+	public String removeUser(@PathVariable String id) {
+		userService.delete(id);
+		return "redirect:/users.html";
 	}
 }
