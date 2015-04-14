@@ -74,7 +74,8 @@ public class UserController {
 
 	@RequestMapping("/team/remove/{id}")
 	public String removeTeam(@PathVariable String id) {
-		teamService.delete(id);
+		Team team = teamService.findOne(id);
+		teamService.delete(team);
 		return "redirect:/account.html";
 	}
 

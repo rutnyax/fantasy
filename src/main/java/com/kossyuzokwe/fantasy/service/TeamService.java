@@ -1,6 +1,8 @@
 package com.kossyuzokwe.fantasy.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.method.P;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import com.kossyuzokwe.fantasy.entity.Team;
@@ -31,7 +33,12 @@ public class TeamService {
 		teamRepository.save(team);
 	}
 
-	public void delete(String id) {
-		teamRepository.delete(id);
+	@PreAuthorize("#team.user.userName == authentication.name or hasRole('ROLE_ADMIN')")
+	public void delete(@P("team") Team team) {
+		teamRepository.delete(team);
+	}
+
+	public Team findOne(String id) {
+		return teamRepository.findOne(id);
 	}
 }
