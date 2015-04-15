@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -24,6 +25,7 @@ public class Team {
 	@Column(name = "team_id")
 	private String teamId;
 
+	@Size(min = 1, message = "Name must be at least 1 character.")
 	@Column(name = "team_name")
 	private String teamName;
 

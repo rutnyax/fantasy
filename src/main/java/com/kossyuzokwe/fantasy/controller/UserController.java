@@ -2,9 +2,12 @@ package com.kossyuzokwe.fantasy.controller;
 
 import java.security.Principal;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -52,7 +55,10 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public String doRegister(@ModelAttribute("user") User user) {
+	public String doRegister(@Valid@ModelAttribute("user") User user, BindingResult result) {
+		if (result.hasErrors()){
+			return "user-register";
+		}
 		userService.save(user);
 		return "redirect:/register.html?success=true";
 	}
@@ -65,8 +71,11 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/account", method = RequestMethod.POST)
-	public String createTeam(@ModelAttribute("team") Team team,
-			Principal principal) {
+	public String createTeam(Model model, @Valid@ModelAttribute("team") Team team,
+			Principal principal, BindingResult result) {
+		if (result.hasErrors()){
+			return account(model, principal);
+		}
 		String name = principal.getName();
 		teamService.save(team, name);
 		return "redirect:/account.html";

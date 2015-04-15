@@ -30,6 +30,7 @@
 						<div class="col-sm-10">
 							<form:input path="teamName" type="text" cssClass="form-control"
 								id="inputName" placeholder="Team Name" />
+							<form:errors path="teamName" />
 						</div>
 					</div>
 				</div>

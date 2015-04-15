@@ -11,8 +11,10 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.validator.constraints.Email;
 
 @Entity
 @Table(name = "`user`")
@@ -24,12 +26,16 @@ public class User {
 	@Column(name = "user_id")
 	private String userId;
 
+	@Size(min = 3, message = "Name must be at least 3 characters.")
 	@Column(name = "user_name")
 	private String userName;
 
+	@Email(message = "Invalid email address.")
+	@Size(min = 1, message = "Invalid email address.")
 	@Column(name = "user_email")
 	private String userEmail;
 
+	@Size(min = 3, message = "Password must be at least 3 characters.")
 	@Column(name = "user_password")
 	private String userPassword;
 
