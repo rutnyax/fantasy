@@ -1,11 +1,11 @@
-package com.kossyuzokwe.fantasy.repository;
+package com.kossyuzokwe.fantasy.jpa;
 
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.kossyuzokwe.fantasy.entity.League;
-import com.kossyuzokwe.fantasy.entity.User;
+import com.kossyuzokwe.fantasy.model.League;
+import com.kossyuzokwe.fantasy.model.User;
 
 public interface LeagueRepository extends JpaRepository<League, String> {
 

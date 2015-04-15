@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.kossyuzokwe.fantasy.entity.Team;
-import com.kossyuzokwe.fantasy.entity.User;
+import com.kossyuzokwe.fantasy.model.Team;
+import com.kossyuzokwe.fantasy.model.User;
 import com.kossyuzokwe.fantasy.service.TeamService;
 import com.kossyuzokwe.fantasy.service.UserService;
 
@@ -37,6 +37,38 @@ public class UserController {
 		return new Team();
 	}
 
+	@RequestMapping(value = "/account", method = RequestMethod.POST)
+	public String createTeam(Model model,
+			@Valid @ModelAttribute("team") Team team, Principal principal,
+			BindingResult result) {
+		if (result.hasErrors()) {
+			return account(model, principal);
+		}
+		String name = principal.getName();
+		teamService.save(team, name);
+		return "redirect:/account.html";
+	}
+
+	@RequestMapping("/register")
+	public String showRegister() {
+		return "user-register";
+	}
+
+	@RequestMapping(value = "/register", method = RequestMethod.POST)
+	public String doRegister(@Valid @ModelAttribute("user") User user,
+			BindingResult result) {
+		if (result.hasErrors()) {
+			return "user-register";
+		}
+		userService.save(user);
+		return "redirect:/register.html?success=true";
+	}
+
+	@RequestMapping("/login")
+	public String login() {
+		return "login";
+	}
+
 	@RequestMapping("/users")
 	public String users(Model model) {
 		model.addAttribute("users", userService.findAll());
@@ -49,43 +81,11 @@ public class UserController {
 		return "user-detail";
 	}
 
-	@RequestMapping("/register")
-	public String showRegister() {
-		return "user-register";
-	}
-
-	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public String doRegister(@Valid@ModelAttribute("user") User user, BindingResult result) {
-		if (result.hasErrors()){
-			return "user-register";
-		}
-		userService.save(user);
-		return "redirect:/register.html?success=true";
-	}
-
-	@RequestMapping("/account")
+	@RequestMapping(value="/account", method=RequestMethod.GET)
 	public String account(Model model, Principal principal) {
 		String name = principal.getName();
 		model.addAttribute("user", userService.findOneWithTeamsByName(name));
-		return "user-detail";
-	}
-
-	@RequestMapping(value = "/account", method = RequestMethod.POST)
-	public String createTeam(Model model, @Valid@ModelAttribute("team") Team team,
-			Principal principal, BindingResult result) {
-		if (result.hasErrors()){
-			return account(model, principal);
-		}
-		String name = principal.getName();
-		teamService.save(team, name);
-		return "redirect:/account.html";
-	}
-
-	@RequestMapping("/team/remove/{id}")
-	public String removeTeam(@PathVariable String id) {
-		Team team = teamService.findOne(id);
-		teamService.delete(team);
-		return "redirect:/account.html";
+		return "account";
 	}
 
 	@RequestMapping("/users/remove/{id}")
@@ -93,4 +93,65 @@ public class UserController {
 		userService.delete(id);
 		return "redirect:/users.html";
 	}
+	
+/*
+ * --------------------------------------------------------------------------------------
+ * ------------------------------------- NEW REST METHODS -------------------------------
+ * --------------------------------------------------------------------------------------
+	
+	@RequestMapping(value="/users",method=RequestMethod.GET)
+	public String listUsers(){
+		return null;
+	}
+	
+	@RequestMapping(value="/users/{id}",method=RequestMethod.GET)
+	public String getUser(){
+		return null;
+	}
+	
+	@RequestMapping(value="/users/{id}",method=RequestMethod.PUT)
+	public String updateUser(){
+		return null;
+	}
+	
+	@RequestMapping(value="/users/{id}",method=RequestMethod.DELETE)
+	public String deleteUser(){
+		return null;
+	}
+	
+	@RequestMapping(value="/users/me",method=RequestMethod.GET)
+	public String getMe(){
+		return null;
+	}
+	
+	@RequestMapping(value="/users/password",method=RequestMethod.POST)
+	public String changePassword(){
+		return null;
+	}
+	
+	@RequestMapping(value="/auth/forgot",method=RequestMethod.POST)
+	public String forgotPassword(){
+		return null;
+	}
+	
+	@RequestMapping(value="/auth/reset/{token}",method=RequestMethod.GET)
+	public String validateResetToken(){
+		return null;
+	}
+	
+	@RequestMapping(value="/auth/reset/{token}",method=RequestMethod.POST)
+	public String resetPassword(){
+		return null;
+	}
+	
+	@RequestMapping(value="/auth/signup",method=RequestMethod.POST)
+	public String signUp(){
+		return null;
+	}
+	
+	@RequestMapping(value="/auth/signin",method=RequestMethod.POST)
+	public String signIn(){
+		return null;
+	}
+	*/
 }

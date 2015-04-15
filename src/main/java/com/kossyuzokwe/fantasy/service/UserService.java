@@ -11,15 +11,15 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.kossyuzokwe.fantasy.entity.Player;
-import com.kossyuzokwe.fantasy.entity.Role;
-import com.kossyuzokwe.fantasy.entity.Team;
-import com.kossyuzokwe.fantasy.entity.User;
-import com.kossyuzokwe.fantasy.repository.LeagueRepository;
-import com.kossyuzokwe.fantasy.repository.PlayerRepository;
-import com.kossyuzokwe.fantasy.repository.RoleRepository;
-import com.kossyuzokwe.fantasy.repository.TeamRepository;
-import com.kossyuzokwe.fantasy.repository.UserRepository;
+import com.kossyuzokwe.fantasy.jpa.LeagueRepository;
+import com.kossyuzokwe.fantasy.jpa.PlayerRepository;
+import com.kossyuzokwe.fantasy.jpa.RoleRepository;
+import com.kossyuzokwe.fantasy.jpa.TeamRepository;
+import com.kossyuzokwe.fantasy.jpa.UserRepository;
+import com.kossyuzokwe.fantasy.model.Player;
+import com.kossyuzokwe.fantasy.model.Role;
+import com.kossyuzokwe.fantasy.model.Team;
+import com.kossyuzokwe.fantasy.model.User;
 import com.kossyuzokwe.fantasy.util.Constants;
 
 @Service

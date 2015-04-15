@@ -3,10 +3,10 @@ package com.kossyuzokwe.fantasy.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.kossyuzokwe.fantasy.repository.LeagueRepository;
-import com.kossyuzokwe.fantasy.repository.PlayerRepository;
-import com.kossyuzokwe.fantasy.repository.TeamRepository;
-import com.kossyuzokwe.fantasy.repository.UserRepository;
+import com.kossyuzokwe.fantasy.jpa.LeagueRepository;
+import com.kossyuzokwe.fantasy.jpa.PlayerRepository;
+import com.kossyuzokwe.fantasy.jpa.TeamRepository;
+import com.kossyuzokwe.fantasy.jpa.UserRepository;
 
 @Service
 public class PlayerService {

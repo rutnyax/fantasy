@@ -1,4 +1,4 @@
-package com.kossyuzokwe.fantasy.entity;
+package com.kossyuzokwe.fantasy.model;
 
 import java.sql.Date;
 
@@ -15,7 +15,7 @@ import org.hibernate.annotations.GenericGenerator;
 public class Fixture {
 
 	@Id
-	@GenericGenerator(name = "sequence_object_id", strategy = "com.kossyuzokwe.fantasy.entity.ObjectIdGenerator")
+	@GenericGenerator(name = "sequence_object_id", strategy = "com.kossyuzokwe.fantasy.util.ObjectIdGenerator")
 	@GeneratedValue(generator = "sequence_object_id")
 	@Column(name = "fixture_id")
 	private String fixtureId;

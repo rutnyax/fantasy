@@ -19,7 +19,7 @@
 		<property name="entityManagerFactory" ref="emf"></property>
 	</bean>
 
-	<jpa:repositories base-package="com.kossyuzokwe.fantasy.repository"
+	<jpa:repositories base-package="com.kossyuzokwe.fantasy.jpa"
 		entity-manager-factory-ref="emf" />
 
 	<import resource="security.xml" />

@@ -1,4 +1,4 @@
-package com.kossyuzokwe.fantasy.entity;
+package com.kossyuzokwe.fantasy.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,7 +15,7 @@ import org.hibernate.annotations.GenericGenerator;
 public class Player {
 
 	@Id
-	@GenericGenerator(name = "sequence_object_id", strategy = "com.kossyuzokwe.fantasy.entity.ObjectIdGenerator")
+	@GenericGenerator(name = "sequence_object_id", strategy = "com.kossyuzokwe.fantasy.util.ObjectIdGenerator")
 	@GeneratedValue(generator = "sequence_object_id")
 	@Column(name = "player_id")
 	private String playerId;

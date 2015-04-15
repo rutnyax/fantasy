@@ -1,4 +1,4 @@
-package com.kossyuzokwe.fantasy.entity;
+package com.kossyuzokwe.fantasy.util;
 
 import java.io.Serializable;
 
