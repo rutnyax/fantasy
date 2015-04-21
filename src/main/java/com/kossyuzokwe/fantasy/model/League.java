@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -32,6 +34,10 @@ public class League {
 
 	@OneToMany(mappedBy = "league")
 	private List<Team> teams;
+
+	@ManyToMany
+	@JoinTable
+	private List<Player> players;
 
 	public String getLeagueId() {
 		return leagueId;
@@ -63,5 +69,13 @@ public class League {
 
 	public void setTeams(List<Team> teams) {
 		this.teams = teams;
+	}
+
+	public List<Player> getPlayers() {
+		return players;
+	}
+
+	public void setPlayers(List<Player> players) {
+		this.players = players;
 	}
 }

@@ -1,10 +1,13 @@
 package com.kossyuzokwe.fantasy.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -26,6 +29,9 @@ public class Player {
 	@ManyToOne
 	@JoinColumn(name = "team_id")
 	private Team team;
+
+	@ManyToMany(mappedBy = "players")
+	private List<League> leagues;
 
 	public String getPlayerId() {
 		return playerId;
@@ -49,5 +55,13 @@ public class Player {
 
 	public void setTeam(Team team) {
 		this.team = team;
+	}
+
+	public List<League> getLeagues() {
+		return leagues;
+	}
+
+	public void setLeagues(List<League> leagues) {
+		this.leagues = leagues;
 	}
 }
