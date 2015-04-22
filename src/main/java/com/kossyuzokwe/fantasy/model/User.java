@@ -16,6 +16,8 @@ import javax.validation.constraints.Size;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.validator.constraints.Email;
 
+import com.kossyuzokwe.fantasy.annotation.UniqueUsername;
+
 @Entity
 @Table(name = "`user`")
 public class User {
@@ -27,7 +29,8 @@ public class User {
 	private String userId;
 
 	@Size(min = 3, message = "Name must be at least 3 characters.")
-	@Column(name = "user_name")
+	@Column(name = "user_name", unique = true)
+	@UniqueUsername(message="Username already exists.")
 	private String userName;
 
 	@Email(message = "Invalid email address.")
