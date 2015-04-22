@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="ISO-8859-1"%>
 
+<%@ include file="../layout/taglib.jsp"%>
+
 <style>
 <!--
 .form-signin {
@@ -51,8 +53,7 @@
 -->
 </style>
 
-<form class="form-signin" name="f" action="/fantasy-football/login"
-	method="POST">
+<form class="form-signin" role="form" name="f" action="<spring:url value='/login' />" method="POST">
 	<h2 class="form-signin-heading">Please sign in</h2>
 	<label for="inputName" class="sr-only">Name</label> <input type="text"
 		name="username" id="inputName" class="form-control" placeholder="Name"
