@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kossyuzokwe.fantasy.model.Team;
 import com.kossyuzokwe.fantasy.model.User;
@@ -62,6 +64,13 @@ public class UserController {
 		}
 		userService.save(user);
 		return "redirect:/register.html?success=true";
+	}
+	
+	@RequestMapping("/register/available")
+	@ResponseBody
+	public String available(@RequestParam String username) {
+		Boolean available = userService.findOneByUserName(username) == null;
+		return available.toString();
 	}
 
 	@RequestMapping("/login")

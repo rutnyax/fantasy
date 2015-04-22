@@ -45,12 +45,12 @@ public class UserService {
 		return userRepository.findAll();
 	}
 
-	public User findOne(String id) {
+	public User findOneById(String id) {
 		return userRepository.findOne(id);
 	}
 
 	public User findOneWithTeamsById(String id) {
-		User user = findOne(id);
+		User user = findOneById(id);
 		List<Team> teams = teamRepository.findByUser(user, new PageRequest(0,
 				Constants.STANDARD_PAGE_SIZE, Direction.DESC, "teamId"));
 		for (Team team : teams) {
@@ -80,5 +80,9 @@ public class UserService {
 
 	public void delete(String id) {
 		userRepository.delete(id);
+	}
+	
+	public User findOneByUserName(String username) {
+		return userRepository.findByUserName(username);
 	}
 }
