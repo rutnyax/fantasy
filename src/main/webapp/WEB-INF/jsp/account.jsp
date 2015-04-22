@@ -7,7 +7,7 @@
 <button type="button" class="btn btn-primary btn-lg" data-toggle="modal"
 	data-target="#myModal">New Team</button>
 
-<form:form commandName="team" cssClass="form-horizontal">
+<form:form commandName="team" cssClass="form-horizontal teamForm">
 	<!-- Modal -->
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
@@ -45,6 +45,21 @@
 			e.preventDefault();
 			$("#removeModal .removeBtn").attr("href", $(this).attr("href"));
 			$("#removeModal").modal();
+		});
+		
+		$('.teamForm').validate({
+			rules : {
+				teamName : {
+					required : true,
+					minlength : 3
+				},
+			},
+			highlight: function(element) {
+				$(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+			},
+			unhighlight: function(element) {
+				$(element).closest('.form-group').removeClass('has-error').addClass('has-success');
+			}
 		});
 	});
 </script>

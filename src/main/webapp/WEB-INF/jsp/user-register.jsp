@@ -3,7 +3,7 @@
 
 <%@ include file="../layout/taglib.jsp"%>
 
-<form:form commandName="user" cssClass="form-horizontal">
+<form:form commandName="user" cssClass="form-horizontal registrationForm">
 
 	<c:if test="<c:out value='${param.success eq true}' />">
 		<div class="alert alert-success">Registration Successful</div>
@@ -33,6 +33,13 @@
 			<form:errors path="userPassword" />
 		</div>
 	</div>
+	<div class="form-group">
+		<label for="inputConfirmPassword" class="col-sm-2 control-label">Password again:</label>
+		<div class="col-sm-10">
+			<input type="password" class="form-control" name="confirmPassword"
+				id="inputConfirmPassword" placeholder="Confirm Password" />
+		</div>
+	</div>
 	<!--   <div class="form-group"> -->
 	<!--     <div class="col-sm-offset-2 col-sm-10"> -->
 	<!--       <div class="checkbox"> -->
@@ -48,3 +55,35 @@
 		</div>
 	</div>
 </form:form>
+
+<script type="text/javascript">
+$(document).ready(function() {
+	$(".registrationForm").validate({
+		rules : {
+			userName : {
+				required : true,
+				minlength : 3
+			},
+			userEmail : {
+				required : true,
+				email : true
+			},
+			userPassword : {
+				required : true,
+				minlength : 5
+			},
+			confirmPassword: {
+				required: true,
+				minlength: 5,
+				equalTo: '#inputPassword'
+			},
+		},
+		highlight: function(element) {
+			$(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+		},
+		unhighlight: function(element) {
+			$(element).closest('.form-group').removeClass('has-error').addClass('has-success');
+		}
+	});
+});
+</script>

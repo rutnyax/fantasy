@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="ISO-8859-1"%>
 
-<%@ include file="../layout/taglib.jsp"%>
+<%@ include file="taglib.jsp"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,6 +17,8 @@
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script
 	src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script type="text/javascript"
+	src="//cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.13.1/jquery.validate.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script
 	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
