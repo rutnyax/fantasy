@@ -24,7 +24,7 @@
 
 	<import resource="security.xml" />
 
-	<beans profile="default">
+	<beans profile="dev">
 		<import resource="database-dev.xml" />
 	</beans>
 
