@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kossyuzokwe.fantasy.model.Team;
 import com.kossyuzokwe.fantasy.model.User;
@@ -58,12 +59,13 @@ public class UserController {
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public String doRegister(@Valid @ModelAttribute("user") User user,
-			BindingResult result) {
+			BindingResult result, RedirectAttributes redirectAttributes) {
 		if (result.hasErrors()) {
 			return "user-register";
 		}
 		userService.save(user);
-		return "redirect:/register.html?success=true";
+		redirectAttributes.addFlashAttribute("success", true);
+		return "redirect:/register.html";
 	}
 	
 	@RequestMapping("/register/available")
