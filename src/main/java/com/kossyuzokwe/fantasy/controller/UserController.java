@@ -54,14 +54,14 @@ public class UserController {
 
 	@RequestMapping("/register")
 	public String showRegister() {
-		return "user-register";
+		return "auth/signup";
 	}
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public String doRegister(@Valid @ModelAttribute("user") User user,
 			BindingResult result, RedirectAttributes redirectAttributes) {
 		if (result.hasErrors()) {
-			return "user-register";
+			return "auth/signup";
 		}
 		userService.save(user);
 		redirectAttributes.addFlashAttribute("success", true);
@@ -77,26 +77,26 @@ public class UserController {
 
 	@RequestMapping("/login")
 	public String login() {
-		return "login";
+		return "auth/signin";
 	}
 
 	@RequestMapping("/users")
 	public String users(Model model) {
 		model.addAttribute("users", userService.findAll());
-		return "users";
+		return "admin/users";
 	}
 
 	@RequestMapping("/users/{id}")
 	public String userDetail(Model model, @PathVariable String id) {
 		model.addAttribute("user", userService.findOneWithTeamsById(id));
-		return "user-detail";
+		return "admin/user-detail";
 	}
 
 	@RequestMapping(value="/account", method=RequestMethod.GET)
 	public String account(Model model, Principal principal) {
 		String name = principal.getName();
 		model.addAttribute("user", userService.findOneWithTeamsByName(name));
-		return "account";
+		return "settings/account";
 	}
 
 	@RequestMapping("/users/remove/{id}")
