@@ -9,10 +9,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.kossyuzokwe.fantasy.model.League;
 import com.kossyuzokwe.fantasy.service.LeagueService;
+import com.kossyuzokwe.fantasy.service.UserService;
 
 @Controller
 @RequestMapping("/leagues")
 public class LeagueController {
+
+	@Autowired
+	private UserService userService;
 
 	@Autowired
 	private LeagueService leagueService;

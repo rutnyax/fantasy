@@ -1,12 +1,53 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+	pageEncoding="ISO-8859-1"%>
 
-</body>
-</html>
+<%@ include file="/WEB-INF/layout/taglib.jsp"%>
+
+<form:form commandName="league" cssClass="form-horizontal createLeagueForm">
+	<div class="form-group">
+		<label for="inputName" class="col-sm-2 control-label">Name:</label>
+		<div class="col-sm-10">
+			<form:input path="leagueName" type="text" cssClass="form-control"
+				id="inputName" placeholder="League Name" />
+			<form:errors path="leagueName" />
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="col-sm-offset-2 col-sm-10">
+			<input type="submit" value="Create" class="btn btn-default" />
+		</div>
+	</div>
+</form:form>
+
+<script type="text/javascript">
+$(document).ready(function() {
+	$(".createLeagueForm").validate({
+		rules : {
+			leagueName : {
+				required : true,
+				minlength : 3,
+				remote: {
+					url: "<spring:url value='/leagues/create/available.html' />",
+					type: "get",
+					data: {
+						teamname: function() {
+							return $("#inputName").val();
+						}
+					}
+				}
+			},
+		},
+		highlight: function(element) {
+			$(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+		},
+		unhighlight: function(element) {
+			$(element).closest('.form-group').removeClass('has-error').addClass('has-success');
+		},
+		messages: {
+			leagueName: {
+				remote: "League name already exists."
+			}
+		}
+	});
+});
+</script>
