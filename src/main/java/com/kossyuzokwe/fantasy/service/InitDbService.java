@@ -6,6 +6,8 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -25,6 +27,8 @@ import com.kossyuzokwe.fantasy.model.User;
 @Transactional
 @Service
 public class InitDbService {
+	
+	Logger LOGGER = LoggerFactory.getLogger(getClass());
 
 	@Autowired
 	private RoleRepository roleRepository;

@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
@@ -25,6 +27,8 @@ import com.kossyuzokwe.fantasy.util.Constants;
 @Service
 @Transactional
 public class UserService {
+	
+	Logger LOGGER = LoggerFactory.getLogger(getClass());
 
 	@Autowired
 	private UserRepository userRepository;
