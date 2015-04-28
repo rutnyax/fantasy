@@ -1,6 +1,6 @@
 package com.kossyuzokwe.fantasy.model;
 
-import java.util.List;
+import java.util.Collection;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -16,6 +16,7 @@ import javax.validation.constraints.Size;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.validator.constraints.Email;
 
+import com.kossyuzokwe.fantasy.validation.UniqueEmail;
 import com.kossyuzokwe.fantasy.validation.UniqueUsername;
 
 @Entity
@@ -30,30 +31,40 @@ public class User {
 
 	@Size(min = 3, message = "Name must be at least 3 characters.")
 	@Column(name = "user_name", unique = true)
-	@UniqueUsername(message="Username already exists.")
+	@UniqueUsername(message = "Username already exists.")
 	private String userName;
 
 	@Email(message = "Invalid email address.")
 	@Size(min = 1, message = "Invalid email address.")
 	@Column(name = "user_email")
+	@UniqueEmail(message = "Email address already exists.")
 	private String userEmail;
 
-	@Size(min = 3, message = "Password must be at least 3 characters.")
+	@Size(min = 5, message = "Password must be at least 5 characters.")
 	@Column(name = "user_password")
 	private String userPassword;
 
 	@Column(name = "user_enabled")
 	private boolean userEnabled;
 
+	@Column(name = "token_expired")
+	private boolean tokenExpired;
+
 	@ManyToMany
 	@JoinTable
-	private List<Role> roles;
+	private Collection<Role> roles;
 
 	@OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
-	private List<Team> teams;
+	private Collection<Team> teams;
 
 	@OneToMany(mappedBy = "owner")
-	private List<League> leaguesOwned;
+	private Collection<League> leaguesOwned;
+
+	public User() {
+		super();
+		this.userEnabled = false;
+		this.tokenExpired = false;
+	}
 
 	public String getUserId() {
 		return userId;
@@ -87,28 +98,12 @@ public class User {
 		this.userPassword = userPassword;
 	}
 
-	public List<Role> getRoles() {
+	public Collection<Role> getRoles() {
 		return roles;
 	}
 
-	public void setRoles(List<Role> roles) {
+	public void setRoles(Collection<Role> roles) {
 		this.roles = roles;
-	}
-
-	public List<Team> getTeams() {
-		return teams;
-	}
-
-	public void setTeams(List<Team> teams) {
-		this.teams = teams;
-	}
-
-	public List<League> getLeaguesOwned() {
-		return leaguesOwned;
-	}
-
-	public void setLeaguesOwned(List<League> leaguesOwned) {
-		this.leaguesOwned = leaguesOwned;
 	}
 
 	public boolean isUserEnabled() {
@@ -117,5 +112,60 @@ public class User {
 
 	public void setUserEnabled(boolean userEnabled) {
 		this.userEnabled = userEnabled;
+	}
+
+	public boolean isTokenExpired() {
+		return tokenExpired;
+	}
+
+	public void setTokenExpired(boolean tokenExpired) {
+		this.tokenExpired = tokenExpired;
+	}
+
+	public Collection<Team> getTeams() {
+		return teams;
+	}
+
+	public void setTeams(Collection<Team> teams) {
+		this.teams = teams;
+	}
+
+	public Collection<League> getLeaguesOwned() {
+		return leaguesOwned;
+	}
+
+	public void setLeaguesOwned(Collection<League> leaguesOwned) {
+		this.leaguesOwned = leaguesOwned;
+	}
+
+	@Override
+	public int hashCode() {
+		int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((userEmail == null) ? 0 : userEmail.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		User user = (User) obj;
+		if (!userEmail.equals(user.userEmail))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("User [userName=").append(userName).append("]")
+				.append("[userEmail=").append(userEmail).append("]");
+		return builder.toString();
 	}
 }

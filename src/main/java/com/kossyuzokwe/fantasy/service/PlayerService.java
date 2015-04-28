@@ -33,7 +33,7 @@ public class PlayerService {
 	@Autowired
 	private UserRepository userRepository;
 
-	public List<Player> getPlayers() {
+	public Collection<Player> getPlayers() {
 		return playerRepository.findAll(new PageRequest(0, Constants.STANDARD_PAGE_SIZE, Direction.DESC, "playerName")).getContent();
 	}
 }

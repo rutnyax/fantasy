@@ -1,7 +1,7 @@
 package com.kossyuzokwe.fantasy.service;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 
 import javax.transaction.Transactional;
 
@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.kossyuzokwe.fantasy.dao.LeagueRepository;
@@ -45,7 +45,10 @@ public class UserService {
 	@Autowired
 	private LeagueRepository leagueRepository;
 
-	public List<User> findAll() {
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+
+	public Collection<User> findAll() {
 		return userRepository.findAll();
 	}
 
@@ -55,10 +58,10 @@ public class UserService {
 
 	public User findOneWithTeamsById(String id) {
 		User user = findOneById(id);
-		List<Team> teams = teamRepository.findByUser(user, new PageRequest(0,
+		Collection<Team> teams = teamRepository.findByUser(user, new PageRequest(0,
 				Constants.STANDARD_PAGE_SIZE, Direction.DESC, "teamId"));
 		for (Team team : teams) {
-			List<Player> players = playerRepository.findByTeam(team,
+			Collection<Player> players = playerRepository.findByTeam(team,
 					new PageRequest(0, Constants.STANDARD_PAGE_SIZE,
 							Direction.DESC, "playerId"));
 			team.setPlayers(players);
@@ -69,9 +72,8 @@ public class UserService {
 
 	public void save(User user) {
 		user.setUserEnabled(true);
-		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		user.setUserPassword(encoder.encode(user.getUserPassword()));
-		List<Role> roles = new ArrayList<Role>();
+		user.setUserPassword(passwordEncoder.encode(user.getUserPassword()));
+		Collection<Role> roles = new ArrayList<Role>();
 		roles.add(roleRepository.findByRoleName("ROLE_USER"));
 		user.setRoles(roles);
 		userRepository.save(user);

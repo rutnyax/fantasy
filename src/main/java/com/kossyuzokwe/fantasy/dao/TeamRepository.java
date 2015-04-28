@@ -10,5 +10,5 @@ import com.kossyuzokwe.fantasy.model.User;
 
 public interface TeamRepository extends JpaRepository<Team, String>{
 
-	List<Team> findByUser(User user, Pageable pageable);
+	Collection<Team> findByUser(User user, Pageable pageable);
 }

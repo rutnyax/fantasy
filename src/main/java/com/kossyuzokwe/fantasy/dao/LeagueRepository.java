@@ -9,5 +9,5 @@ import com.kossyuzokwe.fantasy.model.User;
 
 public interface LeagueRepository extends JpaRepository<League, String> {
 
-	List<League> findLeaguesByOwner(User user);
+	Collection<League> findLeaguesByOwner(User user);
 }

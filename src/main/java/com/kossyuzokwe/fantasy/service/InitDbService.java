@@ -1,7 +1,7 @@
 package com.kossyuzokwe.fantasy.service;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 
 import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
@@ -9,10 +9,9 @@ import javax.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.kossyuzokwe.fantasy.dao.FixtureRepository;
 import com.kossyuzokwe.fantasy.dao.LeagueRepository;
 import com.kossyuzokwe.fantasy.dao.PlayerRepository;
 import com.kossyuzokwe.fantasy.dao.RoleRepository;
@@ -46,13 +45,11 @@ public class InitDbService {
 	private PlayerRepository playerRepository;
 
 	@Autowired
-	private FixtureRepository fixtureRepository;
+	private PasswordEncoder passwordEncoder;
 
 	@PostConstruct
 	public void init() {
 		if (roleRepository.findByRoleName("ROLE_ADMIN") == null) {
-			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-
 			Role roleUser = new Role();
 			roleUser.setRoleName("ROLE_USER");
 			roleRepository.save(roleUser);
@@ -65,8 +62,8 @@ public class InitDbService {
 			userAdmin.setUserEnabled(true);
 			userAdmin.setUserName("admin");
 			userAdmin.setUserEmail("admin@admin.com");
-			userAdmin.setUserPassword(encoder.encode("admin"));
-			List<Role> roles = new ArrayList<Role>();
+			userAdmin.setUserPassword(passwordEncoder.encode("admin"));
+			Collection<Role> roles = new ArrayList<Role>();
 			roles.add(roleUser);
 			roles.add(roleAdmin);
 			userAdmin.setRoles(roles);
@@ -97,8 +94,8 @@ public class InitDbService {
 			userNotAdmin.setUserEnabled(true);
 			userNotAdmin.setUserName("test");
 			userNotAdmin.setUserEmail("test@test.com");
-			userNotAdmin.setUserPassword(encoder.encode("test"));
-			List<Role> roles2 = new ArrayList<Role>();
+			userNotAdmin.setUserPassword(passwordEncoder.encode("test"));
+			Collection<Role> roles2 = new ArrayList<Role>();
 			roles2.add(roleUser);
 			userNotAdmin.setRoles(roles2);
 			userRepository.save(userNotAdmin);

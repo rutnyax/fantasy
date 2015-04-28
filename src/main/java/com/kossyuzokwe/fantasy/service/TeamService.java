@@ -55,7 +55,7 @@ public class TeamService {
 		return teamRepository.findOne(id);
 	}
 
-	public List<Team> findAll() {
+	public Collection<Team> findAll() {
 		return teamRepository.findAll();
 	}
 }
