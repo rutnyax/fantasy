@@ -16,7 +16,7 @@ import javax.validation.constraints.Size;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.validator.constraints.Email;
 
-import com.kossyuzokwe.fantasy.annotation.UniqueUsername;
+import com.kossyuzokwe.fantasy.validation.UniqueUsername;
 
 @Entity
 @Table(name = "`user`")
