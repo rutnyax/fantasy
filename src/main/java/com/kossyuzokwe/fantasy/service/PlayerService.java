@@ -9,10 +9,10 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
-import com.kossyuzokwe.fantasy.jpa.LeagueRepository;
-import com.kossyuzokwe.fantasy.jpa.PlayerRepository;
-import com.kossyuzokwe.fantasy.jpa.TeamRepository;
-import com.kossyuzokwe.fantasy.jpa.UserRepository;
+import com.kossyuzokwe.fantasy.dao.LeagueRepository;
+import com.kossyuzokwe.fantasy.dao.PlayerRepository;
+import com.kossyuzokwe.fantasy.dao.TeamRepository;
+import com.kossyuzokwe.fantasy.dao.UserRepository;
 import com.kossyuzokwe.fantasy.model.Player;
 import com.kossyuzokwe.fantasy.util.Constants;
 

@@ -1,4 +1,4 @@
-package com.kossyuzokwe.fantasy.jpa;
+package com.kossyuzokwe.fantasy.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
