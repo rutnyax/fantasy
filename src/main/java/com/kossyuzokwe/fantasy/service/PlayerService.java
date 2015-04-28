@@ -1,6 +1,6 @@
 package com.kossyuzokwe.fantasy.service;
 
-import java.util.List;
+import java.util.Collection;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

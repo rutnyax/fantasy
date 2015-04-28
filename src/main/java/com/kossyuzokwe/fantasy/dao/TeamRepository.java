@@ -1,6 +1,6 @@
 package com.kossyuzokwe.fantasy.dao;
 
-import java.util.List;
+import java.util.Collection;
 
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
