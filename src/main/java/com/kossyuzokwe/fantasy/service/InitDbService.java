@@ -2,12 +2,13 @@ package com.kossyuzokwe.fantasy.service;
 
 import java.util.Arrays;
 
-import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationListener;
+import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +24,7 @@ import com.kossyuzokwe.fantasy.model.Team;
 import com.kossyuzokwe.fantasy.model.User;
 
 @Service
-public class InitDbService {
+public class InitDbService implements ApplicationListener<ContextRefreshedEvent> {
 
 	Logger LOGGER = LoggerFactory.getLogger(getClass());
 
@@ -45,8 +46,9 @@ public class InitDbService {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
-	@PostConstruct
-	public void init() {
+	@Override
+	@Transactional
+	public void onApplicationEvent(ContextRefreshedEvent event) {
 		createRoleIfNotFound("ROLE_ADMIN");
 		createRoleIfNotFound("ROLE_USER");
 		createAdminIfNotFound();
