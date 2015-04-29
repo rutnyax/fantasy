@@ -3,6 +3,20 @@
 
 <%@ include file="/WEB-INF/layout/taglib.jsp"%>
 
+<div class="page-header">
+  <h2>My Account <small>...</small></h2>
+</div>
+
+<c:if test="${verified eq true}">
+	<div class="alert alert-success alert-dismissible" role="alert">
+		<button type="button" class="close" data-dismiss="alert"
+			aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
+		<strong>Welcome!</strong> Your account has been verified.
+	</div>
+</c:if>
+
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary btn-lg" data-toggle="modal"
 	data-target="#myModal">New Team</button>
