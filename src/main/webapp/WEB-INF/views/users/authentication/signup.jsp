@@ -3,6 +3,10 @@
 
 <%@ include file="/WEB-INF/layout/taglib.jsp"%>
 
+<div class="page-header">
+  <h2>Sign Up <small>to create a new account</small></h2>
+</div>
+
 <form:form commandName="user" cssClass="form-horizontal registrationForm">
 
 	<c:if test="${success eq true}">

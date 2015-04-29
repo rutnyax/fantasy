@@ -3,9 +3,12 @@
 
 <%@ include file="/WEB-INF/layout/taglib.jsp"%>
 
-<h1>
-	<c:out value='${user.userName}' />
-</h1>
+<div class="page-header">
+	<h2>
+		<c:out value='${user.userName}' />
+		's <small>Account</small>
+	</h2>
+</div>
 
 <script type="text/javascript">
 	$(document).ready(function() {
