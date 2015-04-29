@@ -12,6 +12,21 @@
 			expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>
 
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.sendgrid.net" />
+		<property name="port" value="587" />
+		<property name="username" value="#{systemEnvironment['SENDGRID_USERNAME']}" />
+		<property name="password" value="#{systemEnvironment['SENDGRID_PASSWORD']}" />
+		<property name="javaMailProperties">
+			<props>
+				<!-- Use SMTP-AUTH to authenticate to SMTP server -->
+				<prop key="mail.smtp.auth">true</prop>
+				<!-- Use TLS to encrypt communication with SMTP server -->
+				<prop key="mail.smtp.starttls.enable">true</prop>
+			</props>
+		</property>
+	</bean>
+
 	<tx:annotation-driven transaction-manager="transactionManager" />
 
 	<bean class="org.springframework.orm.jpa.JpaTransactionManager"
