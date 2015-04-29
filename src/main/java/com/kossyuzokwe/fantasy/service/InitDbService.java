@@ -22,10 +22,9 @@ import com.kossyuzokwe.fantasy.model.Role;
 import com.kossyuzokwe.fantasy.model.Team;
 import com.kossyuzokwe.fantasy.model.User;
 
-@Transactional
 @Service
 public class InitDbService {
-	
+
 	Logger LOGGER = LoggerFactory.getLogger(getClass());
 
 	@Autowired
@@ -48,31 +47,47 @@ public class InitDbService {
 
 	@PostConstruct
 	public void init() {
-		if (roleRepository.findByRoleName("ROLE_ADMIN") == null) {
-			Role roleUser = new Role();
-			roleUser.setRoleName("ROLE_USER");
-			roleRepository.save(roleUser);
+		createRoleIfNotFound("ROLE_ADMIN");
+		createRoleIfNotFound("ROLE_USER");
+		createAdminIfNotFound();
+		createTestUserIfNotFound();
+	}
 
-			Role roleAdmin = new Role();
-			roleAdmin.setRoleName("ROLE_ADMIN");
-			roleRepository.save(roleAdmin);
+	@Transactional
+	private Role createRoleIfNotFound(String name) {
+		Role role = roleRepository.findByRoleName(name);
+		if (role == null) {
+			role = new Role(name);
+			roleRepository.save(role);
+		}
+		return role;
+	}
 
-			User userAdmin = new User();
-			userAdmin.setUserEnabled(true);
-			userAdmin.setUserName("admin");
-			userAdmin.setUserEmail("admin@admin.com");
-			userAdmin.setUserPassword(passwordEncoder.encode("admin"));
-			userAdmin.setRoles(Arrays.asList(roleAdmin, roleUser));
-			userRepository.save(userAdmin);
+	@Transactional
+	private User createAdminIfNotFound() {
+		User user = userRepository.findByUserName("admin");
+		if (user == null) {
+			Role adminRole = roleRepository.findByRoleName("ROLE_ADMIN");
+			Role userRole = roleRepository.findByRoleName("ROLE_USER");
+			User adminUser = new User();
+			adminUser.setUserName("admin");
+			adminUser.setUserPassword(passwordEncoder.encode("admin"));
+			adminUser.setUserEmail("admin@admin.com");
+			adminUser.setRoles(Arrays.asList(adminRole, userRole));
+			adminUser.setUserEnabled(true);
+			user = userRepository.save(adminUser);
 
-			League premierLeague = new League();
-			premierLeague.setLeagueName("Barclays Premier League");
-			premierLeague.setOwner(userAdmin);
-			leagueRepository.save(premierLeague);
-
+			League premierLeague = leagueRepository
+					.findByLeagueName("Barclays Premier League");
+			if (premierLeague == null) {
+				premierLeague = new League();
+				premierLeague.setLeagueName("Barclays Premier League");
+				premierLeague.setOwner(adminUser);
+				leagueRepository.save(premierLeague);
+			}
 			Team teamChelsea = new Team();
 			teamChelsea.setTeamName("Chelsea FC");
-			teamChelsea.setUser(userAdmin);
+			teamChelsea.setUser(adminUser);
 			teamChelsea.setLeague(premierLeague);
 			teamRepository.save(teamChelsea);
 
@@ -85,30 +100,43 @@ public class InitDbService {
 			playerTerry.setPlayerName("John Terry");
 			playerTerry.setTeam(teamChelsea);
 			playerRepository.save(playerTerry);
-
-			User userNotAdmin = new User();
-			userNotAdmin.setUserEnabled(true);
-			userNotAdmin.setUserName("test");
-			userNotAdmin.setUserEmail("test@test.com");
-			userNotAdmin.setUserPassword(passwordEncoder.encode("test"));
-			userNotAdmin.setRoles(Arrays.asList(roleUser));
-			userRepository.save(userNotAdmin);
-
-			Team teamArsenal = new Team();
-			teamArsenal.setTeamName("Arsenal");
-			teamArsenal.setUser(userNotAdmin);
-			teamArsenal.setLeague(premierLeague);
-			teamRepository.save(teamArsenal);
-
-			Player playerSanchez = new Player();
-			playerSanchez.setPlayerName("Alexis Sanchez");
-			playerSanchez.setTeam(teamArsenal);
-			playerRepository.save(playerSanchez);
-
-			Player playerWalcott = new Player();
-			playerWalcott.setPlayerName("Theo Walcott");
-			playerWalcott.setTeam(teamArsenal);
-			playerRepository.save(playerWalcott);
 		}
+		return user;
+	}
+
+	@Transactional
+	private User createTestUserIfNotFound() {
+		User user = userRepository.findByUserName("test");
+		if (user == null) {
+			Role userRole = roleRepository.findByRoleName("ROLE_USER");
+			User testUser = new User();
+			testUser.setUserName("test");
+			testUser.setUserPassword(passwordEncoder.encode("test"));
+			testUser.setUserEmail("test@test.com");
+			testUser.setRoles(Arrays.asList(userRole));
+			testUser.setUserEnabled(true);
+			user = userRepository.save(testUser);
+
+			League premierLeague = leagueRepository
+					.findByLeagueName("Barclays Premier League");
+			if (premierLeague != null) {
+				Team teamArsenal = new Team();
+				teamArsenal.setTeamName("Arsenal");
+				teamArsenal.setUser(testUser);
+				teamArsenal.setLeague(premierLeague);
+				teamRepository.save(teamArsenal);
+
+				Player playerSanchez = new Player();
+				playerSanchez.setPlayerName("Alexis Sanchez");
+				playerSanchez.setTeam(teamArsenal);
+				playerRepository.save(playerSanchez);
+
+				Player playerWalcott = new Player();
+				playerWalcott.setPlayerName("Theo Walcott");
+				playerWalcott.setTeam(teamArsenal);
+				playerRepository.save(playerWalcott);
+			}
+		}
+		return user;
 	}
 }
