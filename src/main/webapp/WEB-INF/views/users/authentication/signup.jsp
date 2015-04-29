@@ -10,7 +10,7 @@
 <form:form commandName="user" cssClass="form-horizontal registrationForm">
 
 	<c:if test="${success eq true}">
-		<div class="alert alert-success">Registration Successful. Please check your email for a link to activate your account.</div>
+		<div class="alert alert-success">Registration Successful. Please check your email for instructions on activating your account.</div>
 	</c:if>
 
 	<div class="form-group">
