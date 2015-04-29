@@ -1,4 +1,4 @@
-package com.kossyuzokwe.fantasy.jpa;
+package com.kossyuzokwe.fantasy.dao;
 
 import java.util.List;
 
@@ -10,4 +10,6 @@ import com.kossyuzokwe.fantasy.model.User;
 public interface LeagueRepository extends JpaRepository<League, String> {
 
 	List<League> findLeaguesByOwner(User user);
+
+	League findByLeagueName(String name);
 }

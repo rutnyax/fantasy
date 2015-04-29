@@ -5,9 +5,11 @@
 	<persistence-unit name="fantasy-football">
 		<class>com.kossyuzokwe.fantasy.model.Fixture</class>
 		<class>com.kossyuzokwe.fantasy.model.League</class>
+		<class>com.kossyuzokwe.fantasy.model.PasswordResetToken</class>
 		<class>com.kossyuzokwe.fantasy.model.Player</class>
 		<class>com.kossyuzokwe.fantasy.model.Role</class>
 		<class>com.kossyuzokwe.fantasy.model.Team</class>
 		<class>com.kossyuzokwe.fantasy.model.User</class>
+		<class>com.kossyuzokwe.fantasy.model.VerificationToken</class>
 	</persistence-unit>
 </persistence>

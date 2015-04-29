@@ -16,7 +16,8 @@ import javax.validation.constraints.Size;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.validator.constraints.Email;
 
-import com.kossyuzokwe.fantasy.annotation.UniqueUsername;
+import com.kossyuzokwe.fantasy.validation.UniqueEmail;
+import com.kossyuzokwe.fantasy.validation.UniqueUsername;
 
 @Entity
 @Table(name = "`user`")
@@ -30,15 +31,16 @@ public class User {
 
 	@Size(min = 3, message = "Name must be at least 3 characters.")
 	@Column(name = "user_name", unique = true)
-	@UniqueUsername(message="Username already exists.")
+	@UniqueUsername(message = "Username already exists.")
 	private String userName;
 
 	@Email(message = "Invalid email address.")
 	@Size(min = 1, message = "Invalid email address.")
 	@Column(name = "user_email")
+	@UniqueEmail(message = "Email address already exists.")
 	private String userEmail;
 
-	@Size(min = 3, message = "Password must be at least 3 characters.")
+	@Size(min = 5, message = "Password must be at least 5 characters.")
 	@Column(name = "user_password")
 	private String userPassword;
 
@@ -54,6 +56,11 @@ public class User {
 
 	@OneToMany(mappedBy = "owner")
 	private List<League> leaguesOwned;
+
+	public User() {
+		super();
+		this.userEnabled = false;
+	}
 
 	public String getUserId() {
 		return userId;
@@ -95,6 +102,14 @@ public class User {
 		this.roles = roles;
 	}
 
+	public boolean isUserEnabled() {
+		return userEnabled;
+	}
+
+	public void setUserEnabled(boolean userEnabled) {
+		this.userEnabled = userEnabled;
+	}
+
 	public List<Team> getTeams() {
 		return teams;
 	}
@@ -111,11 +126,34 @@ public class User {
 		this.leaguesOwned = leaguesOwned;
 	}
 
-	public boolean isUserEnabled() {
-		return userEnabled;
+	@Override
+	public int hashCode() {
+		int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((userEmail == null) ? 0 : userEmail.hashCode());
+		return result;
 	}
 
-	public void setUserEnabled(boolean userEnabled) {
-		this.userEnabled = userEnabled;
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		User user = (User) obj;
+		if (!userEmail.equals(user.userEmail))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("User [userName=").append(userName).append("]")
+				.append("[userEmail=").append(userEmail).append("]");
+		return builder.toString();
 	}
 }

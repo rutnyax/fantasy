@@ -27,6 +27,15 @@ public class Role {
 	@ManyToMany(mappedBy = "roles")
 	private List<User> users;
 
+	public Role() {
+		super();
+	}
+
+	public Role(String name) {
+		super();
+		this.roleName = name;
+	}
+
 	public String getRoleId() {
 		return roleId;
 	}
@@ -49,5 +58,36 @@ public class Role {
 
 	public void setUsers(List<User> users) {
 		this.users = users;
+	}
+
+	@Override
+	public int hashCode() {
+		int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((roleName == null) ? 0 : roleName.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Role role = (Role) obj;
+		if (!role.equals(role.roleName))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Role [name=").append(roleName).append("]")
+				.append("[id=").append(roleId).append("]");
+		return builder.toString();
 	}
 }

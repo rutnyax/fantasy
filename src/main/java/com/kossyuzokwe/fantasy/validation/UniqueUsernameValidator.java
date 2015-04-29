@@ -1,11 +1,11 @@
-package com.kossyuzokwe.fantasy.annotation;
+package com.kossyuzokwe.fantasy.validation;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.kossyuzokwe.fantasy.jpa.UserRepository;
+import com.kossyuzokwe.fantasy.dao.UserRepository;
 
 public class UniqueUsernameValidator implements ConstraintValidator<UniqueUsername, String> {
 	

@@ -1,7 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="ISO-8859-1"%>
+	pageEncoding="UTF-8"%>
 
 <%@ include file="/WEB-INF/layout/taglib.jsp"%>
+
+<div class="page-header">
+  <h2>Application Users <small>...</small></h2>
+</div>
 
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -29,7 +33,7 @@
 				</a></td>
 				<td><a
 					href='<spring:url value="/users/remove/${user.userId}.html" />'
-					class="btn btn-danger triggerRemove">Remove</a></td>
+					class="btn btn-danger triggerRemove">Delete</a></td>
 			</tr>
 		</c:forEach>
 	</tbody>
@@ -45,12 +49,12 @@
 					aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
-				<h4 class="modal-title" id="myModalLabel">Remove Team</h4>
+				<h4 class="modal-title" id="myModalLabel">Delete User</h4>
 			</div>
-			<div class="modal-body">Really remove?</div>
+			<div class="modal-body">Are you sure you want to delete this user?</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-				<a href="" class="btn btn-danger removeBtn">Remove</a>
+				<a href="" class="btn btn-danger removeBtn">Delete</a>
 			</div>
 		</div>
 	</div>

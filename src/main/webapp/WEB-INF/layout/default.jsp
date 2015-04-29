@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="ISO-8859-1"%>
+	pageEncoding="UTF-8"%>
 
 <%@ include file="taglib.jsp"%>
 <!DOCTYPE html>
@@ -11,17 +11,14 @@
 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 <title><tiles:getAsString name="title" /></title>
 
-<link rel="stylesheet"
-	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<link rel="icon" href='<spring:url value="/favicon.ico" />'>
 
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script
-	src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script type="text/javascript"
-	src="//cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.13.1/jquery.validate.min.js"></script>
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script
-	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href='<spring:url value="/resources/css/bootstrap.min.css" />'>
+<link rel="stylesheet" type="text/css" href='<spring:url value="/resources/css/styles.css" />'>
+
+<script type="text/javascript" src='<spring:url value="/resources/js/jquery.min.js" />'></script>
+<script type="text/javascript" src='<spring:url value="/resources/js/jquery.validate.min.js" />'></script>
+<script type="text/javascript" src='<spring:url value="/resources/js/bootstrap.min.js" />'></script>
 <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -32,9 +29,7 @@
 	<tilesx:useAttribute name="current" />
 
 	<div class="container">
-		<!-- 		<nav class="navbar navbar-default navbar-fixed-top"> -->
-		<!-- 		<nav class="navbar navbar-default navbar-static-top"> -->
-		<nav class="navbar navbar-default">
+		<nav class="navbar navbar-default navbar-fixed-top">
 			<div class="container-fluid">
 				<!-- Brand and toggle get grouped for better mobile display -->
 				<div class="navbar-header">
@@ -61,24 +56,26 @@
 					<ul class="nav navbar-nav navbar-right">
 						<security:authorize access="isAnonymous()">
 							<li class="${current == 'signup' ? 'active' : ''}"><a
-								href='<spring:url value="/register.html" />'>Register</a></li>
+								href='<spring:url value="/signup.html" />'>Sign Up</a></li>
 							<li class="${current == 'signin' ? 'active' : ''}"><a
-								href='<spring:url value="/login.html" />'>Login</a></li>
+								href='<spring:url value="/signin.html" />'>Sign In</a></li>
 						</security:authorize>
 						<security:authorize access="isAuthenticated()">
 							<li class="dropdown ${current == 'settings' ? 'active' : ''}"><a
 								href="#" class="dropdown-toggle" data-toggle="dropdown"
-								role="button" aria-expanded="false">Me <span class="caret"></span>
+								role="button" aria-expanded="false">${pageContext.request.userPrincipal.name}
+									<span class="caret"></span>
 							</a>
 								<ul class="dropdown-menu" role="menu">
 									<li><a href='<spring:url value="/account.html" />'>Account</a></li>
-									<li><a href="#">Edit Profile</a></li>
+									<li><a href='<spring:url value="/password/edit.html" />'>Change
+											Password</a></li>
 									<li class="divider"></li>
 									<li><c:url var="logoutUrl" value="/logout" />
 										<form name="f" action="${logoutUrl}" method="post">
 											<input type="hidden" name="${_csrf.parameterName}"
 												value="${_csrf.token}" />
-										</form> <a href="#" onclick="document.f.submit()">Log out</a></li>
+										</form> <a href="#" onclick="document.f.submit()">Sign out</a></li>
 								</ul></li>
 						</security:authorize>
 					</ul>
@@ -92,7 +89,5 @@
 	</div>
 
 	<tiles:insertAttribute name="footer" />
-	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-	<!-- 		<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script> -->
 </body>
 </html>
