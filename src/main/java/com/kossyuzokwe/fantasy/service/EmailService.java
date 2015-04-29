@@ -7,7 +7,7 @@ import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Service;
 
-import com.kossyuzokwe.event.OnUserEvent;
+import com.kossyuzokwe.fantasy.event.OnUserEvent;
 import com.kossyuzokwe.fantasy.model.User;
 import com.kossyuzokwe.fantasy.util.Constants;
 

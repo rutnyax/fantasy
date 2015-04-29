@@ -26,9 +26,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.kossyuzokwe.event.OnRegistrationCompleteEvent;
-import com.kossyuzokwe.event.OnResetPasswordEvent;
-import com.kossyuzokwe.event.OnReverifyAccountEvent;
+import com.kossyuzokwe.fantasy.event.OnRegistrationCompleteEvent;
+import com.kossyuzokwe.fantasy.event.OnResetPasswordEvent;
+import com.kossyuzokwe.fantasy.event.OnReverifyAccountEvent;
 import com.kossyuzokwe.fantasy.model.PasswordResetToken;
 import com.kossyuzokwe.fantasy.model.Team;
 import com.kossyuzokwe.fantasy.model.User;

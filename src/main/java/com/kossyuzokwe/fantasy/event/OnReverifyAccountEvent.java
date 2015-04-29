@@ -1,4 +1,4 @@
-package com.kossyuzokwe.event;
+package com.kossyuzokwe.fantasy.event;
 
 import com.kossyuzokwe.fantasy.model.User;
 

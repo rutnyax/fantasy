@@ -23,7 +23,7 @@ public class PasswordResetToken {
 	private static final int EXPIRATION = 60 * 24;
 
 	@Id
-	@GenericGenerator(name = "sequence_object_id", strategy = "com.kossyuzokwe.util.ObjectIdGenerator")
+	@GenericGenerator(name = "sequence_object_id", strategy = "com.kossyuzokwe.fantasy.util.ObjectIdGenerator")
 	@GeneratedValue(generator = "sequence_object_id")
 	@Column(name = "password_reset_token_id")
 	private String passwordResetTokenId;

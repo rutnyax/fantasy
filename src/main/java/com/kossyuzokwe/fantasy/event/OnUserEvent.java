@@ -1,4 +1,4 @@
-package com.kossyuzokwe.event;
+package com.kossyuzokwe.fantasy.event;
 
 import org.springframework.context.ApplicationEvent;
 

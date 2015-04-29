@@ -1,11 +1,11 @@
-package com.kossyuzokwe.event.listener;
+package com.kossyuzokwe.fantasy.event.listener;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.mail.SimpleMailMessage;
 
-import com.kossyuzokwe.event.OnReverifyAccountEvent;
 import com.kossyuzokwe.fantasy.dao.VerificationTokenRepository;
+import com.kossyuzokwe.fantasy.event.OnReverifyAccountEvent;
 import com.kossyuzokwe.fantasy.model.User;
 import com.kossyuzokwe.fantasy.model.VerificationToken;
 import com.kossyuzokwe.fantasy.service.EmailService;

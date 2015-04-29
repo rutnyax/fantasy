@@ -13,9 +13,9 @@
 	</context:component-scan>
 	
 	<bean id="registrationListener"
-		class="com.kossyuzokwe.event.listener.RegistrationCompleteListener" />
-	<bean id="reverifyListener" class="com.kossyuzokwe.event.listener.ReverifyAccountListener" />
-	<bean id="resetListener" class="com.kossyuzokwe.event.listener.ResetPasswordListener" />
+		class="com.kossyuzokwe.fantasy.event.listener.RegistrationCompleteListener" />
+	<bean id="reverifyListener" class="com.kossyuzokwe.fantasy.event.listener.ReverifyAccountListener" />
+	<bean id="resetListener" class="com.kossyuzokwe.fantasy.event.listener.ResetPasswordListener" />
 
 	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<property name="host" value="smtp.sendgrid.net" />
