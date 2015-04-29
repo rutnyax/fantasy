@@ -1,6 +1,6 @@
 package com.kossyuzokwe.fantasy.service;
 
-import java.util.Collection;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,7 +33,7 @@ public class PlayerService {
 	@Autowired
 	private UserRepository userRepository;
 
-	public Collection<Player> getPlayers() {
+	public List<Player> getPlayers() {
 		return playerRepository.findAll(new PageRequest(0, Constants.STANDARD_PAGE_SIZE, Direction.DESC, "playerName")).getContent();
 	}
 }

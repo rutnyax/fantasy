@@ -1,6 +1,6 @@
 package com.kossyuzokwe.fantasy.dao;
 
-import java.util.Collection;
+import java.util.List;
 
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -10,5 +10,5 @@ import com.kossyuzokwe.fantasy.model.User;
 
 public interface TeamRepository extends JpaRepository<Team, String>{
 
-	Collection<Team> findByUser(User user, Pageable pageable);
+	List<Team> findByUser(User user, Pageable pageable);
 }

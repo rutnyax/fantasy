@@ -1,7 +1,7 @@
 package com.kossyuzokwe.fantasy.service;
 
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -48,7 +48,7 @@ public class UserService {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
-	public Collection<User> findAll() {
+	public List<User> findAll() {
 		return userRepository.findAll();
 	}
 
@@ -58,10 +58,10 @@ public class UserService {
 
 	public User findOneWithTeamsById(String id) {
 		User user = findOneById(id);
-		Collection<Team> teams = teamRepository.findByUser(user, new PageRequest(0,
+		List<Team> teams = teamRepository.findByUser(user, new PageRequest(0,
 				Constants.STANDARD_PAGE_SIZE, Direction.DESC, "teamId"));
 		for (Team team : teams) {
-			Collection<Player> players = playerRepository.findByTeam(team,
+			List<Player> players = playerRepository.findByTeam(team,
 					new PageRequest(0, Constants.STANDARD_PAGE_SIZE,
 							Direction.DESC, "playerId"));
 			team.setPlayers(players);
@@ -73,7 +73,7 @@ public class UserService {
 	public void save(User user) {
 		user.setUserEnabled(true);
 		user.setUserPassword(passwordEncoder.encode(user.getUserPassword()));
-		Collection<Role> roles = new ArrayList<Role>();
+		List<Role> roles = new ArrayList<Role>();
 		roles.add(roleRepository.findByRoleName("ROLE_USER"));
 		user.setRoles(roles);
 		userRepository.save(user);

@@ -1,6 +1,6 @@
 package com.kossyuzokwe.fantasy.model;
 
-import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -52,13 +52,13 @@ public class User {
 
 	@ManyToMany
 	@JoinTable
-	private Collection<Role> roles;
+	private List<Role> roles;
 
 	@OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
-	private Collection<Team> teams;
+	private List<Team> teams;
 
 	@OneToMany(mappedBy = "owner")
-	private Collection<League> leaguesOwned;
+	private List<League> leaguesOwned;
 
 	public User() {
 		super();
@@ -98,11 +98,11 @@ public class User {
 		this.userPassword = userPassword;
 	}
 
-	public Collection<Role> getRoles() {
+	public List<Role> getRoles() {
 		return roles;
 	}
 
-	public void setRoles(Collection<Role> roles) {
+	public void setRoles(List<Role> roles) {
 		this.roles = roles;
 	}
 
@@ -122,19 +122,19 @@ public class User {
 		this.tokenExpired = tokenExpired;
 	}
 
-	public Collection<Team> getTeams() {
+	public List<Team> getTeams() {
 		return teams;
 	}
 
-	public void setTeams(Collection<Team> teams) {
+	public void setTeams(List<Team> teams) {
 		this.teams = teams;
 	}
 
-	public Collection<League> getLeaguesOwned() {
+	public List<League> getLeaguesOwned() {
 		return leaguesOwned;
 	}
 
-	public void setLeaguesOwned(Collection<League> leaguesOwned) {
+	public void setLeaguesOwned(List<League> leaguesOwned) {
 		this.leaguesOwned = leaguesOwned;
 	}
 

@@ -1,7 +1,7 @@
 package com.kossyuzokwe.fantasy.service;
 
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
@@ -63,7 +63,7 @@ public class InitDbService {
 			userAdmin.setUserName("admin");
 			userAdmin.setUserEmail("admin@admin.com");
 			userAdmin.setUserPassword(passwordEncoder.encode("admin"));
-			Collection<Role> roles = new ArrayList<Role>();
+			List<Role> roles = new ArrayList<Role>();
 			roles.add(roleUser);
 			roles.add(roleAdmin);
 			userAdmin.setRoles(roles);
@@ -95,7 +95,7 @@ public class InitDbService {
 			userNotAdmin.setUserName("test");
 			userNotAdmin.setUserEmail("test@test.com");
 			userNotAdmin.setUserPassword(passwordEncoder.encode("test"));
-			Collection<Role> roles2 = new ArrayList<Role>();
+			List<Role> roles2 = new ArrayList<Role>();
 			roles2.add(roleUser);
 			userNotAdmin.setRoles(roles2);
 			userRepository.save(userNotAdmin);

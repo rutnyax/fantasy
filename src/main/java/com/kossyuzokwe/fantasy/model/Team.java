@@ -1,6 +1,6 @@
 package com.kossyuzokwe.fantasy.model;
 
-import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -34,7 +34,7 @@ public class Team {
 	private User user;
 
 	@OneToMany(mappedBy = "team", cascade = CascadeType.REMOVE)
-	private Collection<Player> players;
+	private List<Player> players;
 
 	@ManyToOne
 	@JoinColumn(name = "league_id")
@@ -64,11 +64,11 @@ public class Team {
 		this.user = user;
 	}
 
-	public Collection<Player> getPlayers() {
+	public List<Player> getPlayers() {
 		return players;
 	}
 
-	public void setPlayers(Collection<Player> players) {
+	public void setPlayers(List<Player> players) {
 		this.players = players;
 	}
 

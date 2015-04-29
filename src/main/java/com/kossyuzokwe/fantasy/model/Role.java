@@ -1,6 +1,6 @@
 package com.kossyuzokwe.fantasy.model;
 
-import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -25,7 +25,7 @@ public class Role {
 	private String roleName;
 
 	@ManyToMany(mappedBy = "roles")
-	private Collection<User> users;
+	private List<User> users;
 
 	public Role() {
 		super();
@@ -52,11 +52,11 @@ public class Role {
 		this.roleName = roleName;
 	}
 
-	public Collection<User> getUsers() {
+	public List<User> getUsers() {
 		return users;
 	}
 
-	public void setUsers(Collection<User> users) {
+	public void setUsers(List<User> users) {
 		this.users = users;
 	}
 

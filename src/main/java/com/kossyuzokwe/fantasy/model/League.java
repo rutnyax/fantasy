@@ -1,6 +1,6 @@
 package com.kossyuzokwe.fantasy.model;
 
-import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -33,11 +33,11 @@ public class League {
 	private User owner;
 
 	@OneToMany(mappedBy = "league")
-	private Collection<Team> teams;
+	private List<Team> teams;
 
 	@ManyToMany
 	@JoinTable
-	private Collection<Player> players;
+	private List<Player> players;
 
 	public String getLeagueId() {
 		return leagueId;
@@ -63,19 +63,19 @@ public class League {
 		this.owner = owner;
 	}
 
-	public Collection<Team> getTeams() {
+	public List<Team> getTeams() {
 		return teams;
 	}
 
-	public void setTeams(Collection<Team> teams) {
+	public void setTeams(List<Team> teams) {
 		this.teams = teams;
 	}
 
-	public Collection<Player> getPlayers() {
+	public List<Player> getPlayers() {
 		return players;
 	}
 
-	public void setPlayers(Collection<Player> players) {
+	public void setPlayers(List<Player> players) {
 		this.players = players;
 	}
 }
