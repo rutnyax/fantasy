@@ -47,9 +47,6 @@ public class User {
 	@Column(name = "user_enabled")
 	private boolean userEnabled;
 
-	@Column(name = "token_expired")
-	private boolean tokenExpired;
-
 	@ManyToMany
 	@JoinTable
 	private List<Role> roles;
@@ -63,7 +60,6 @@ public class User {
 	public User() {
 		super();
 		this.userEnabled = false;
-		this.tokenExpired = false;
 	}
 
 	public String getUserId() {
@@ -112,14 +108,6 @@ public class User {
 
 	public void setUserEnabled(boolean userEnabled) {
 		this.userEnabled = userEnabled;
-	}
-
-	public boolean isTokenExpired() {
-		return tokenExpired;
-	}
-
-	public void setTokenExpired(boolean tokenExpired) {
-		this.tokenExpired = tokenExpired;
 	}
 
 	public List<Team> getTeams() {
