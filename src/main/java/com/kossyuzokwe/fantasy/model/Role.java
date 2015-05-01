@@ -1,5 +1,6 @@
 package com.kossyuzokwe.fantasy.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -29,10 +30,12 @@ public class Role {
 
 	public Role() {
 		super();
+		this.users = new ArrayList<User>();
 	}
 
 	public Role(String name) {
 		super();
+		this.users = new ArrayList<User>();
 		this.roleName = name;
 	}
 

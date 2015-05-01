@@ -1,14 +1,15 @@
 package com.kossyuzokwe.fantasy.model;
 
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -26,13 +27,30 @@ public class Player {
 	@Column(name = "player_name")
 	private String playerName;
 
-	@ManyToOne
-	@JoinColumn(name = "team_id")
-	private Team team;
-
 	@ManyToMany(mappedBy = "players")
 	private List<League> leagues;
 
+	@ManyToMany(mappedBy="players")
+	private List<Team> teams;
+
+	@Column(name = "created_at")
+	private Timestamp createdAt;
+
+	public Player() {
+		super();
+		this.leagues = new ArrayList<League>();
+		this.teams = new ArrayList<Team>();
+		this.createdAt = new Timestamp(new Date().getTime());
+	}
+
+	public Player(String playerName) {
+		super();
+		this.playerName = playerName;
+		this.leagues = new ArrayList<League>();
+		this.teams = new ArrayList<Team>();
+		this.createdAt = new Timestamp(new Date().getTime());
+	}
+	
 	public String getPlayerId() {
 		return playerId;
 	}
@@ -49,12 +67,12 @@ public class Player {
 		this.playerName = playerName;
 	}
 
-	public Team getTeam() {
-		return team;
+	public Timestamp getCreatedAt() {
+		return createdAt;
 	}
 
-	public void setTeam(Team team) {
-		this.team = team;
+	public void setCreatedAt(Timestamp createdAt) {
+		this.createdAt = createdAt;
 	}
 
 	public List<League> getLeagues() {
@@ -63,5 +81,13 @@ public class Player {
 
 	public void setLeagues(List<League> leagues) {
 		this.leagues = leagues;
+	}
+
+	public List<Team> getTeams() {
+		return teams;
+	}
+
+	public void setTeams(List<Team> teams) {
+		this.teams = teams;
 	}
 }

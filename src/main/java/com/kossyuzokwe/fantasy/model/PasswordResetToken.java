@@ -17,7 +17,7 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
-@Table(name = "reset_token")
+@Table(name = "`reset_token`")
 public class PasswordResetToken {
 
 	private static final int EXPIRATION = 60 * 24;

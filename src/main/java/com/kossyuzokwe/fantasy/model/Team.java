@@ -1,15 +1,17 @@
 package com.kossyuzokwe.fantasy.model;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
@@ -33,12 +35,42 @@ public class Team {
 	@JoinColumn(name = "user_id")
 	private User user;
 
-	@OneToMany(mappedBy = "team", cascade = CascadeType.REMOVE)
+	@Column(name = "created_at")
+	private Timestamp createdAt;
+
+	@ManyToMany
+	@JoinTable
 	private List<Player> players;
 
 	@ManyToOne
 	@JoinColumn(name = "league_id")
 	private League league;
+	
+	public Team() {
+		super();
+		this.createdAt = new Timestamp(new Date().getTime());
+	}
+	
+	public Team(String teamName) {
+		super();
+		this.teamName = teamName;
+		this.createdAt = new Timestamp(new Date().getTime());
+	}
+	
+	public Team(String teamName, User user) {
+		super();
+		this.teamName = teamName;
+		this.user = user;
+		this.createdAt = new Timestamp(new Date().getTime());
+	}
+	
+	public Team(String teamName, User user, League league) {
+		super();
+		this.teamName = teamName;
+		this.user = user;
+		this.league = league;
+		this.createdAt = new Timestamp(new Date().getTime());
+	}
 
 	public String getTeamId() {
 		return teamId;
@@ -64,19 +96,27 @@ public class Team {
 		this.user = user;
 	}
 
-	public List<Player> getPlayers() {
-		return players;
-	}
-
-	public void setPlayers(List<Player> players) {
-		this.players = players;
-	}
-
 	public League getLeague() {
 		return league;
 	}
 
 	public void setLeague(League league) {
 		this.league = league;
+	}
+
+	public Timestamp getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(Timestamp createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public List<Player> getPlayers() {
+		return players;
+	}
+
+	public void setPlayers(List<Player> players) {
+		this.players = players;
 	}
 }

@@ -1,5 +1,8 @@
 package com.kossyuzokwe.fantasy.model;
 
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -36,7 +39,7 @@ public class User {
 
 	@Email(message = "Invalid email address.")
 	@Size(min = 1, message = "Invalid email address.")
-	@Column(name = "user_email")
+	@Column(name = "user_email", unique = true)
 	@UniqueEmail(message = "Email address already exists.")
 	private String userEmail;
 
@@ -47,6 +50,9 @@ public class User {
 	@Column(name = "user_enabled")
 	private boolean userEnabled;
 
+	@Column(name = "created_at")
+	private Timestamp createdAt;
+
 	@ManyToMany
 	@JoinTable
 	private List<Role> roles;
@@ -55,10 +61,17 @@ public class User {
 	private List<Team> teams;
 
 	@OneToMany(mappedBy = "owner")
-	private List<League> leaguesOwned;
+	private List<League> ownerships;
+
+	@ManyToMany(mappedBy = "members")
+	private List<League> leagues;
 
 	public User() {
 		super();
+		this.leagues = new ArrayList<League>();
+		this.ownerships = new ArrayList<League>();
+		this.teams = new ArrayList<Team>();
+		this.createdAt = new Timestamp(new Date().getTime());
 		this.userEnabled = false;
 	}
 
@@ -118,14 +131,6 @@ public class User {
 		this.teams = teams;
 	}
 
-	public List<League> getLeaguesOwned() {
-		return leaguesOwned;
-	}
-
-	public void setLeaguesOwned(List<League> leaguesOwned) {
-		this.leaguesOwned = leaguesOwned;
-	}
-
 	@Override
 	public int hashCode() {
 		int prime = 31;
@@ -155,5 +160,29 @@ public class User {
 		builder.append("User [userName=").append(userName).append("]")
 				.append("[userEmail=").append(userEmail).append("]");
 		return builder.toString();
+	}
+
+	public Timestamp getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(Timestamp createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public List<League> getOwnerships() {
+		return ownerships;
+	}
+
+	public void setOwnerships(List<League> ownerships) {
+		this.ownerships = ownerships;
+	}
+
+	public List<League> getLeagues() {
+		return leagues;
+	}
+
+	public void setLeagues(List<League> leagues) {
+		this.leagues = leagues;
 	}
 }

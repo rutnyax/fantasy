@@ -12,4 +12,6 @@ public interface LeagueRepository extends JpaRepository<League, String> {
 	List<League> findLeaguesByOwner(User user);
 
 	League findByLeagueName(String name);
+
+	League findByLeagueId(String leagueId);
 }

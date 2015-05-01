@@ -17,7 +17,7 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
-@Table(name = "verification_token")
+@Table(name = "`verification_token`")
 public class VerificationToken {
 
 	private static final int EXPIRATION = 60 * 24;

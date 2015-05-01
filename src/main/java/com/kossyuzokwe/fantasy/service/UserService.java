@@ -3,14 +3,13 @@ package com.kossyuzokwe.fantasy.service;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort.Direction;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -26,12 +25,11 @@ import com.kossyuzokwe.fantasy.model.Player;
 import com.kossyuzokwe.fantasy.model.Team;
 import com.kossyuzokwe.fantasy.model.User;
 import com.kossyuzokwe.fantasy.model.VerificationToken;
-import com.kossyuzokwe.fantasy.util.Constants;
 
 @Service
 @Transactional
 public class UserService {
-	
+
 	Logger LOGGER = LoggerFactory.getLogger(getClass());
 
 	@Autowired
@@ -76,12 +74,11 @@ public class UserService {
 
 	public User findOneWithTeamsById(String id) {
 		User user = findUserByUserId(id);
-		List<Team> teams = teamRepository.findByUser(user, new PageRequest(0,
-				Constants.STANDARD_PAGE_SIZE, Direction.DESC, "teamId"));
+		List<Team> teams = teamRepository.findByUser(user);
 		for (Team team : teams) {
-			List<Player> players = playerRepository.findByTeam(team,
-					new PageRequest(0, Constants.STANDARD_PAGE_SIZE,
-							Direction.DESC, "playerId"));
+			List<Player> players = playerRepository.findAll(team.getPlayers()
+					.stream().map(Player::getPlayerId)
+					.collect(Collectors.toList()));
 			team.setPlayers(players);
 		}
 		user.setTeams(teams);
@@ -94,7 +91,8 @@ public class UserService {
 	}
 
 	public User findUserByVerificationToken(String verificationToken) {
-		return verificationTokenRepository.findByToken(verificationToken).getUser();
+		return verificationTokenRepository.findByToken(verificationToken)
+				.getUser();
 	}
 
 	public User findUserByPasswordResetToken(String token) {
@@ -127,7 +125,8 @@ public class UserService {
 		return verificationTokenRepository.findByToken(VerificationToken);
 	}
 
-	public VerificationToken regenerateVerificationToken(String existingVerificationToken) {
+	public VerificationToken regenerateVerificationToken(
+			String existingVerificationToken) {
 		VerificationToken vToken = verificationTokenRepository
 				.findByToken(existingVerificationToken);
 		vToken.updateToken(UUID.randomUUID().toString());
