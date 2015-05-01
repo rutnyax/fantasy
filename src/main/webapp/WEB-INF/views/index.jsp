@@ -4,24 +4,30 @@
 <%@ include file="/WEB-INF/layout/taglib.jsp"%>
 
 <div class="page-header">
-  <h2>Players <small>All Players</small></h2>
+	<h2>
+		Players <small>All Players</small>
+	</h2>
 </div>
 
-	<!-- 	<table -->
-	<!-- 		class="table table-striped table-bordered table-hover table-condensed"> -->
-	<table class="table table-striped table-bordered table-hover">
-		<thead>
+<table id="all-players" class="table table-striped table-bordered table-hover">
+	<thead>
+		<tr>
+			<th>ID</th>
+			<th>Name</th>
+		</tr>
+	</thead>
+	<tbody>
+		<c:forEach items="${players}" var="player">
 			<tr>
-				<th>ID</th>
-				<th>Name</th>
+				<td><c:out value='${player.playerId}' /></td>
+				<td><c:out value='${player.playerName}' /></td>
 			</tr>
-		</thead>
-		<tbody>
-			<c:forEach items="${players}" var="player">
-				<tr>
-					<td><c:out value='${player.playerId}' /></td>
-					<td><c:out value='${player.playerName}' /></td>
-				</tr>
-			</c:forEach>
-		</tbody>
-	</table>
+		</c:forEach>
+	</tbody>
+</table>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#all-players').DataTable();
+	});
+</script>
