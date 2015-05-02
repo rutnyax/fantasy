@@ -52,6 +52,10 @@
 							<li class="${current == 'users' ? 'active' : ''}"><a
 								href='<spring:url value="/users.html" />'>Users</a></li>
 						</security:authorize>
+						<security:authorize access="isAuthenticated()">
+							<li class="${current == 'leagues' ? 'active' : ''}"><a
+								href='<spring:url value="/leagues.html" />'>Leagues</a></li>
+						</security:authorize>
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
 						<security:authorize access="isAnonymous()">
