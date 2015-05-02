@@ -24,123 +24,84 @@
 	<!-- Tab panes -->
 	<div class="tab-content">
 		<div role="tabpanel" class="tab-pane" id="owned">
+			<br>
 			<c:if test="${empty owned}">
 				<c:choose>
 					<c:when test="${empty member}">
-					<br>
-						<div class="alert alert-warning text-center">
-							No Leagues yet, why don't you <a href="" data-toggle="modal"
-								data-target="#myModal">create a league</a>?
-						</div>
+						<p class="text-center">No Leagues yet, why don't you create
+							one?</p>
 					</c:when>
 					<c:otherwise>
-					<br>
-						<div class="alert alert-warning text-center">
-							You don't own any leagues. You can view leagues you're a member
-							of on the next tab or <a href="" data-toggle="modal"
-								data-target="#myModal">create a league</a>?
-						</div>
+						<p class="text-center">You don't own any leagues. You can view
+							leagues you're a member of on the next tab.</p>
 					</c:otherwise>
 				</c:choose>
 			</c:if>
-			<c:forEach items="${owned}" var="league">
-
-				<h3>
-					<c:out value='${league.leagueName}' />
-					<span class="pull-right"> <a
-						href='<spring:url value="/leagues/edit/${league.leagueId}.html" />'
-						class="btn btn-primary">Manage</a></span>
-				</h3>
-
-				<table
-					class="table table-striped table-bordered table-hover table-condensed">
-					<thead>
-						<tr>
-							<th>Team</th>
-							<th>User</th>
-						</tr>
-					</thead>
-					<tbody>
-						<c:forEach items="${league.teams}" var="team">
-							<tr>
-								<td><c:out value="${team.teamName}" /></td>
-								<td><c:out value="${team.user.userName}" /></td>
-							</tr>
-						</c:forEach>
-					</tbody>
-				</table>
-			</c:forEach>
+			<div class="list-group">
+				<c:forEach items="${owned}" var="league">
+					<div class="list-group-item clearfix">
+						<h4 class="list-group-item-heading">
+							<a href='<spring:url value="/leagues/${league.leagueId}.html" />'><c:out
+									value='${league.leagueName}' /></a> <span class="badge pull-right"><c:out
+										value='${fn:length(league.teams)}' /> teams</span>
+						</h4> <a
+								href='<spring:url value="/leagues/edit/${league.leagueId}.html" />'
+								class="btn btn-primary btn-xs pull-right">Manage</a>
+						<small class="list-group-item-text"> Created by <span><a
+								href="<spring:url value='/users/${league.owner.userId}.html' />">${league.owner.userName}</a></span>
+						</small>
+					</div>
+				</c:forEach>
+			</div>
 		</div>
 		<div role="tabpanel" class="tab-pane" id="member">
+			<br>
 			<c:if test="${empty member}">
 				<c:choose>
 					<c:when test="${empty owned}">
-					<br>
-						<div class="alert alert-warning text-center">
-							No Leagues yet, why don't you <a href="" data-toggle="modal"
-								data-target="#myModal">create a league</a>?
-						</div>
+						<p class="text-center">No Leagues yet, why don't you create
+							one?</p>
 					</c:when>
 					<c:otherwise>
-					<br>
-						<div class="alert alert-warning text-center">
-							You don't own any leagues. You can view leagues you're a member
-							of on the next tab or <a href="" data-toggle="modal"
-								data-target="#myModal">create a league</a>?
-						</div>
+						<p class="text-center">You're not a member of any leagues you
+							do not own.</p>
 					</c:otherwise>
 				</c:choose>
 			</c:if>
-			<c:forEach items="${member}" var="league">
-
-				<h3>
-					<c:out value='${league.leagueName}' />
-				</h3>
-
-				<table
-					class="table table-striped table-bordered table-hover table-condensed">
-					<thead>
-						<tr>
-							<th>Team</th>
-							<th>User</th>
-						</tr>
-					</thead>
-					<tbody>
-						<c:forEach items="${league.teams}" var="team">
-							<tr>
-								<td><c:out value="${team.teamName}" /></td>
-								<td><c:out value="${team.user.userName}" /></td>
-							</tr>
-						</c:forEach>
-					</tbody>
-				</table>
-			</c:forEach>
+			<div class="list-group">
+				<c:forEach items="${member}" var="league">
+					<div class="list-group-item clearfix">
+						<h4 class="list-group-item-heading">
+							<a href='<spring:url value="/leagues/${league.leagueId}.html" />'><c:out
+									value='${league.leagueName}' /></a> <span class="badge pull-right"><c:out
+										value='${fn:length(league.teams)}' /> teams</span>
+						</h4>
+						<small class="list-group-item-text"> Created by <span><a
+								href="<spring:url value='/users/${league.owner.userId}.html' />">${league.owner.userName}</a></span>
+						</small>
+					</div>
+				</c:forEach>
+			</div>
 		</div>
 		<div role="tabpanel" class="tab-pane" id="others">
-			<c:forEach items="${all}" var="league">
+			<br>
+			<div class="list-group">
+				<c:forEach items="${other}" var="league">
+					<div class="list-group-item clearfix">
+						<h4 class="list-group-item-heading">
+							<a href='<spring:url value="/leagues/${league.leagueId}.html" />'><c:out
+									value='${league.leagueName}' /></a><span class="badge pull-right"><c:out
+									value='${fn:length(league.teams)}' /> teams</span>
+						</h4>
+						<a class="btn btn-primary btn-xs pull-right"
+							href="<spring:url value='/leagues/join/${league.leagueId}.html' />">Join</a>
 
-				<h3>
-					<c:out value='${league.leagueName}' />
-				</h3>
-
-				<table
-					class="table table-striped table-bordered table-hover table-condensed">
-					<thead>
-						<tr>
-							<th>Team</th>
-							<th>User</th>
-						</tr>
-					</thead>
-					<tbody>
-						<c:forEach items="${league.teams}" var="team">
-							<tr>
-								<td><c:out value="${team.teamName}" /></td>
-								<td><c:out value="${team.user.userName}" /></td>
-							</tr>
-						</c:forEach>
-					</tbody>
-				</table>
-			</c:forEach>
+						<small class="list-group-item-text"> Created by <span><a
+								href="<spring:url value='/users/${league.owner.userId}.html' />">${league.owner.userName}</a></span>
+						</small>
+					</div>
+				</c:forEach>
+			</div>
 		</div>
 	</div>
 </div>
