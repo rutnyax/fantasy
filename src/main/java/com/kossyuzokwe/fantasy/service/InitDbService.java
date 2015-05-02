@@ -1,6 +1,7 @@
 package com.kossyuzokwe.fantasy.service;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -126,7 +127,7 @@ public class InitDbService implements
 	}
 
 	@Transactional
-	private List<Player> createPlayersIfNotFound(List<String> playerNames) {
+	private List<Player> createPlayersIfNotFound(Collection<String> playerNames) {
 		List<Player> playersFound = playerNames.stream().map(playerRepository::findByPlayerName).collect(Collectors.toList());
 		List<String> notFound = playerNames.stream().filter(new Predicate<String>() {
 
