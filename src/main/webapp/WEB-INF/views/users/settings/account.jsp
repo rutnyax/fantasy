@@ -5,7 +5,7 @@
 
 <div class="page-header">
 	<h2>
-		My Account <small>...</small>
+		My Account <small>My Teams</small>
 	</h2>
 </div>
 
@@ -19,62 +19,22 @@
 	</div>
 </c:if>
 
-<c:forEach items="${user.teams}" var="team">
-
-	<h1>
-		<c:out value='${team.teamName}' />
-	</h1>
-	<p>
-		<a href='<spring:url value="/team/remove/${team.teamId}.html" />'
-			class="btn btn-danger triggerRemove">Delete Team</a>
-		<c:out value='${team.league.leagueName}' />
-	</p>
-
-	<table class="table table-striped table-bordered table-hover">
-		<thead>
-			<tr>
-				<th>ID</th>
-				<th>Name</th>
-			</tr>
-		</thead>
-		<tbody>
-			<c:forEach items="${team.players}" var="player">
-				<tr>
-					<td><c:out value='${player.playerId}' /></td>
-					<td><c:out value='${player.playerName}' /></td>
-				</tr>
-			</c:forEach>
-		</tbody>
-	</table>
-</c:forEach>
-
-<!-- Modal -->
-<div class="modal fade" id="removeModal" tabindex="-1" role="dialog"
-	aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal"
-					aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-				<h4 class="modal-title" id="myModalLabel">Remove Team</h4>
-			</div>
-			<div class="modal-body">Really remove?</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-				<a href="" class="btn btn-danger removeBtn">Remove</a>
+<div class="row list-group">
+	<c:forEach items="${user.teams}" var="team">
+		<div class="col-md-6 col-sm-4">
+			<div class="thumbnail">
+				<img src="http://placehold.it/300x140&text=${team.teamName}.png"
+					alt="Team Logo">
+				<div class="list-group-item">
+					<h4 class="list-group-item-heading">
+						<a href='<spring:url value="/teams/${team.teamId}.html" />'><c:out
+								value='${team.teamName}' /></a>
+					</h4>
+					<small class="list-group-item-text"><a
+						href="<spring:url value='/leagues/${team.league.leagueId}.html' />"><c:out
+								value="${team.league.leagueName}" /></a> </small>
+				</div>
 			</div>
 		</div>
-	</div>
+	</c:forEach>
 </div>
-
-<script type="text/javascript">
-	$(document).ready(function() {
-		$(".triggerRemove").click(function(e) {
-			e.preventDefault();
-			$("#removeModal .removeBtn").attr("href", $(this).attr("href"));
-			$("#removeModal").modal();
-		});
-	});
-</script>
