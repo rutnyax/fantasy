@@ -8,11 +8,6 @@
 		<put-attribute name="body" value="/WEB-INF/views/leagues/list-leagues.jsp" />
 		<put-attribute name="current" value="leagues" />
 	</definition>
-	<definition name="leagues/join" extends="default">
-		<put-attribute name="title" value="Join League" />
-		<put-attribute name="body" value="/WEB-INF/views/leagues/join-league.jsp" />
-		<put-attribute name="current" value="leagues" />
-	</definition>
 	<definition name="leagues/create" extends="default">
 		<put-attribute name="title" value="Create League" />
 		<put-attribute name="body" value="/WEB-INF/views/leagues/create-league.jsp" />
