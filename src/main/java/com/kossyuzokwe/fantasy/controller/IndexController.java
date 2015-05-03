@@ -17,14 +17,14 @@ public class IndexController {
 	@Autowired
 	private PlayerService playerService;
 	
-	@RequestMapping("/landing")
-	public String landing() {
-		return "landing";
+	@RequestMapping("/index")
+	public String index() {
+		return "index";
 	}
 	
-	@RequestMapping("/index")
-	public String index(Model model) {
+	@RequestMapping("/home")
+	public String home(Model model) {
 		model.addAttribute("players", playerService.getPlayers());
-		return "index";
+		return "home";
 	}
 }
