@@ -3,12 +3,12 @@
        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
-	<definition name="landing" template="/WEB-INF/views/landing.jsp">
+	<definition name="index" template="/WEB-INF/views/index.jsp">
 		<put-attribute name="title" value="Fantasy Football App" />
 	</definition>
-	<definition name="index" extends="default">
+	<definition name="home" extends="default">
 		<put-attribute name="title" value="Fantasy Football App" />
-		<put-attribute name="body" value="/WEB-INF/views/index.jsp" />
-		<put-attribute name="current" value="index" />
+		<put-attribute name="body" value="/WEB-INF/views/home.jsp" />
+		<put-attribute name="current" value="home" />
 	</definition>
 </tiles-definitions>
