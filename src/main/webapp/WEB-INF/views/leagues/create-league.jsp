@@ -3,6 +3,12 @@
 
 <%@ include file="/WEB-INF/layout/taglib.jsp"%>
 
+<div class="page-header">
+	<h2>
+		Create League <small>to start participating</small>
+	</h2>
+</div>
+
 <form:form commandName="league" cssClass="form-horizontal createLeagueForm">
 	<div class="form-group">
 		<label for="inputName" class="col-sm-2 control-label">Name:</label>
@@ -14,7 +20,7 @@
 	</div>
 	<div class="form-group">
 		<div class="col-sm-offset-2 col-sm-10">
-			<input type="submit" value="Create" class="btn btn-default" />
+			<input type="submit" value="Create" class="btn btn-primary" />
 		</div>
 	</div>
 </form:form>
@@ -27,10 +33,10 @@ $(document).ready(function() {
 				required : true,
 				minlength : 3,
 				remote: {
-					url: "<spring:url value='/leagues/create/available.html' />",
+					url: "<spring:url value='/leagues/available.html' />",
 					type: "get",
 					data: {
-						teamname: function() {
+						name: function() {
 							return $("#inputName").val();
 						}
 					}
