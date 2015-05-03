@@ -59,14 +59,27 @@ public class InitDbService implements
 		Role userRole = createRoleIfNotFound("ROLE_USER");
 		User admin = createUserIfNotFound("admin", "admin", "admin@admin.com", Arrays.asList(adminRole, userRole));
 		User test = createUserIfNotFound("test", "test", "test@test.com", Arrays.asList(userRole));
+		User none = createUserIfNotFound("none", "none", "none@none.com", Arrays.asList(userRole));
+		User someone = createUserIfNotFound("someone", "someone", "someone@someone.com", Arrays.asList(userRole));
+		User other = createUserIfNotFound("other", "other", "other@other.com", Arrays.asList(userRole));
 		League barclays = createLeagueIfNotFound("Barclays Premier League", admin);
+		League bbva = createLeagueIfNotFound("Liga BBVA", someone);
 		barclays = joinLeagueIfNotAMember(barclays, test);
+		barclays = joinLeagueIfNotAMember(barclays, none);
+		bbva = joinLeagueIfNotAMember(bbva, other);
+		bbva = joinLeagueIfNotAMember(bbva, none);
 		List<Player> chelseaPlayers = createPlayersIfNotFound(Constants.CHELSEA_PLAYER_NAMES);
 		List<Player> arsenalPlayers = createPlayersIfNotFound(Constants.ARSENAL_PLAYER_NAMES);
+		List<Player> madridPlayers = createPlayersIfNotFound(Constants.MADRID_PLAYER_NAMES);
+		List<Player> barcelonaPlayers = createPlayersIfNotFound(Constants.BARCELONA_PLAYER_NAMES);
 		Team chelsea = createTeamIfNotFound("Chelsea FC", admin, barclays);
 		Team arsenal = createTeamIfNotFound("Arsenal", test, barclays);
+		Team madrid = createTeamIfNotFound("Real Madrid C.F.", someone, bbva);
+		Team barcelona = createTeamIfNotFound("FC Barcelona", other, bbva);
 		chelsea = addPlayersToTeam(chelsea, chelseaPlayers);
 		arsenal = addPlayersToTeam(arsenal, arsenalPlayers);
+		madrid = addPlayersToTeam(madrid, madridPlayers);
+		barcelona = addPlayersToTeam(barcelona, barcelonaPlayers);
 	}
 
 	@Transactional
@@ -116,9 +129,9 @@ public class InitDbService implements
 
 	@Transactional
 	private League joinLeagueIfNotAMember(League league, User user) {
-		League modifiedLeague = leagueRepository.findByLeagueId(league.getLeagueId());
-		if (modifiedLeague.getMembers().contains(user)) {
-			List<User> currentMembers = modifiedLeague.getMembers();
+		League modifiedLeague = leagueRepository.findByIdFetchMembers(league.getLeagueId());
+		List<User> currentMembers = modifiedLeague.getMembers();
+		if (!currentMembers.contains(user)) {
 			currentMembers.add(user);
 			modifiedLeague.setMembers(currentMembers);
 			modifiedLeague = leagueRepository.save(modifiedLeague);
