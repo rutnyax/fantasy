@@ -8,11 +8,6 @@
 		<put-attribute name="body" value="/WEB-INF/views/teams/list-teams.jsp" />
 		<put-attribute name="current" value="teams" />
 	</definition>
-	<definition name="teams/create" extends="default">
-		<put-attribute name="title" value="Create Team" />
-		<put-attribute name="body" value="/WEB-INF/views/teams/create-team.jsp" />
-		<put-attribute name="current" value="teams" />
-	</definition>
 	<definition name="teams/edit" extends="default">
 		<put-attribute name="title" value="Edit Team" />
 		<put-attribute name="body" value="/WEB-INF/views/teams/edit-team.jsp" />
