@@ -19,8 +19,9 @@
 			<a class="btn btn-primary" title="Edit"
 				href="<spring:url value='/leagues/edit/${league.leagueId}.html' />">
 				<i class="glyphicon glyphicon-edit"></i>
-			</a> <a class="btn btn-danger" title="Delete"> <i
-				class="glyphicon glyphicon-trash"></i>
+			</a> <a class="btn btn-danger triggerRemove" title="Delete"
+				href="<spring:url value='/leagues/remove/${league.leagueId}.html' />">
+				<i class="glyphicon glyphicon-trash"></i>
 			</a>
 		</div>
 	</c:if>
@@ -29,9 +30,10 @@
 <div class="page-header">
 	<h3>
 		Teams
+		<c:if test="${isMember or isOwner}">
 		<c:if test="${not hasTeam}">
-			<a class="btn btn-primary btn-sm"> Register Your Team</a>
-		</c:if>
+			<a class="btn btn-primary btn-sm" href="" data-toggle="modal" data-target="#newTeamModal"> Register Your Team</a>
+		</c:if></c:if>
 	</h3>
 </div>
 
@@ -47,10 +49,10 @@
 	</c:when>
 	<c:otherwise>
 		<div class="alert alert-warning text-center">
-			You are not a member of this league yet, why don't you <a
-				href="<spring:url value='/leagues/join/${league.leagueId}.html' />">join
-				now</a>?
+			You are not a member of this league yet, why don't you <a href=""
+				data-toggle="modal" data-target="#joinModal">join now</a>?
 		</div>
+		<c:set var="joinId" value="${league.leagueId}" />
 	</c:otherwise>
 </c:choose>
 
@@ -100,34 +102,123 @@
 	</div>
 </form:form>
 
+<form:form commandName="joinLeague" cssClass="form-horizontal joinForm" action="${pageContext.request.contextPath}/leagues/join/${joinId}.html" method="POST">
+	<!-- Modal -->
+	<div class="modal fade" id="joinModal" tabindex="-1" role="dialog"
+		aria-labelledby="joinModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="joinModalLabel">Join League</h4>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+						<label for="passcode" class="col-sm-2 control-label">Invite
+							Code:</label>
+						<div class="col-sm-10">
+							<form:input path="passcode" type="text" cssClass="form-control"
+								id="passcode" placeholder="Invite Code" />
+							<form:errors path="passcode" />
+						</div>
+						<input id="passcode-hidden" type="hidden" value="${league.leagueId}" />
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<input type="submit" class="btn btn-primary" value="Submit" />
+				</div>
+			</div>
+		</div>
+	</div>
+</form:form>
+
+<c:if test="${isOwner}">
+	<div class="modal fade" id="removeModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">Delete League</h4>
+				</div>
+				<div class="modal-body">Are you sure you want to delete this
+					league?</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+					<a href="" class="btn btn-danger removeBtn">Delete</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</c:if>
+
 <script type="text/javascript">
-$(document).ready(function() {
-	var client = new ZeroClipboard($('.copy-button'));
-	client.on('ready', function(event) {
-		client.on('copy', function(event) {
-			event.clipboardData.setData('text/plain',
-					$('copy-text').val());
+	$(document).ready(function() {
+		var client = new ZeroClipboard($('.copy-button'));
+		client.on('ready', function(event) {
+			client.on('copy', function(event) {
+				event.clipboardData.setData('text/plain', $('copy-text').val());
+			});
+		});
+		client.on('error', function(event) {
+			ZeroClipboard.destroy();
+		});
+
+		$('.teamForm').validate({
+			rules : {
+				teamName : {
+					required : true,
+					minlength : 3
+				},
+			},
+			highlight : function(element) {
+				$(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+			},
+			unhighlight : function(element) {
+				$(element).closest('.form-group').removeClass('has-error').addClass('has-success');
+			}
+		});
+
+		$('.joinForm').validate({
+			rules : {
+				passcode : {
+					required : true,
+					minlength : 36,
+					remote : {
+						url : "<spring:url value='/leagues/join/${joinId}.html' />",
+						type : "get",
+						data : {
+							passcode : function() {
+								return $("#passcode").val();
+							}
+						}
+					}
+				},
+			},
+			highlight : function(element) {
+				$(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+			},
+			unhighlight : function(element) {
+				$(element).closest('.form-group').removeClass('has-error').addClass('has-success');
+			},
+			messages : {
+				passcode : {
+					remote : "Invalid invite code."
+				}
+			}
+		});
+
+		$(".triggerRemove").click(function(e) {
+			e.preventDefault();
+			$("#removeModal .removeBtn").attr("href",$(this).attr("href"));
+			$("#removeModal").modal();
 		});
 	});
-	client.on('error', function(event) {
-		ZeroClipboard.destroy();
-	});
-
-	$('.teamForm').validate({
-		rules : {
-			teamName : {
-				required : true,
-				minlength : 3
-			},
-		},
-		highlight : function(element) {
-			$(element).closest('.form-group').removeClass(
-					'has-success').addClass('has-error');
-		},
-		unhighlight : function(element) {
-			$(element).closest('.form-group').removeClass(
-					'has-error').addClass('has-success');
-		}
-	});
-});
 </script>
