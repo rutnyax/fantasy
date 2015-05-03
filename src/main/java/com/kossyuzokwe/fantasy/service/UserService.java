@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.kossyuzokwe.fantasy.dao.LeagueRepository;
 import com.kossyuzokwe.fantasy.dao.PasswordResetTokenRepository;
 import com.kossyuzokwe.fantasy.dao.PlayerRepository;
 import com.kossyuzokwe.fantasy.dao.RoleRepository;
@@ -27,7 +26,6 @@ import com.kossyuzokwe.fantasy.model.User;
 import com.kossyuzokwe.fantasy.model.VerificationToken;
 
 @Service
-@Transactional
 public class UserService {
 
 	Logger LOGGER = LoggerFactory.getLogger(getClass());
@@ -45,9 +43,6 @@ public class UserService {
 	private PlayerRepository playerRepository;
 
 	@Autowired
-	private LeagueRepository leagueRepository;
-
-	@Autowired
 	private VerificationTokenRepository verificationTokenRepository;
 
 	@Autowired
@@ -56,22 +51,27 @@ public class UserService {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
+	@Transactional
 	public List<User> findAll() {
 		return userRepository.findAll();
 	}
 
+	@Transactional
 	public User findUserByUserId(String id) {
 		return userRepository.findByUserId(id);
 	}
 
+	@Transactional
 	public User findUserByUserName(String username) {
 		return userRepository.findByUserName(username);
 	}
 
+	@Transactional
 	public User findUserByUserEmail(String email) {
 		return userRepository.findByUserEmail(email);
 	}
 
+	@Transactional
 	public User findOneWithTeamsById(String id) {
 		User user = findUserByUserId(id);
 		List<Team> teams = teamRepository.findByUser(user);
@@ -85,28 +85,34 @@ public class UserService {
 		return user;
 	}
 
+	@Transactional
 	public User findOneWithTeamsByName(String username) {
 		User user = userRepository.findByUserName(username);
 		return findOneWithTeamsById(user.getUserId());
 	}
 
+	@Transactional
 	public User findUserByVerificationToken(String verificationToken) {
 		return verificationTokenRepository.findByToken(verificationToken)
 				.getUser();
 	}
 
+	@Transactional
 	public User findUserByPasswordResetToken(String token) {
 		return resetTokenRepository.findByToken(token).getUser();
 	}
 
+	@Transactional
 	public void save(User user) {
 		userRepository.save(user);
 	}
 
+	@Transactional
 	public void deleteUser(String id) {
 		userRepository.delete(id);
 	}
 
+	@Transactional
 	public User registerNewUserAccount(User userInfo) {
 		User user = new User();
 		user.setUserName(userInfo.getUserName());
@@ -116,15 +122,18 @@ public class UserService {
 		return userRepository.save(user);
 	}
 
+	@Transactional
 	public void createVerificationTokenForUser(User user, String token) {
 		VerificationToken myToken = new VerificationToken(token, user);
 		verificationTokenRepository.save(myToken);
 	}
 
+	@Transactional
 	public VerificationToken getVerificationToken(String VerificationToken) {
 		return verificationTokenRepository.findByToken(VerificationToken);
 	}
 
+	@Transactional
 	public VerificationToken regenerateVerificationToken(
 			String existingVerificationToken) {
 		VerificationToken vToken = verificationTokenRepository
@@ -134,24 +143,29 @@ public class UserService {
 		return vToken;
 	}
 
+	@Transactional
 	public void createPasswordResetTokenForUser(User user, String token) {
 		PasswordResetToken myToken = new PasswordResetToken(token, user);
 		resetTokenRepository.save(myToken);
 	}
 
+	@Transactional
 	public PasswordResetToken getPasswordResetToken(String token) {
 		return resetTokenRepository.findByToken(token);
 	}
 
+	@Transactional
 	public void changeUserPassword(User user, String password) {
 		user.setUserPassword(passwordEncoder.encode(password));
 		userRepository.save(user);
 	}
 
+	@Transactional
 	public boolean validOldPassword(User user, String oldPassword) {
 		return passwordEncoder.matches(oldPassword, user.getUserPassword());
 	}
 
+	@Transactional
 	public boolean emailExists(String email) {
 		User user = userRepository.findByUserEmail(email);
 		if (user != null) {

@@ -30,11 +30,9 @@ import com.kossyuzokwe.fantasy.event.OnRegistrationCompleteEvent;
 import com.kossyuzokwe.fantasy.event.OnResetPasswordEvent;
 import com.kossyuzokwe.fantasy.event.OnReverifyAccountEvent;
 import com.kossyuzokwe.fantasy.model.PasswordResetToken;
-import com.kossyuzokwe.fantasy.model.Team;
 import com.kossyuzokwe.fantasy.model.User;
 import com.kossyuzokwe.fantasy.model.VerificationToken;
 import com.kossyuzokwe.fantasy.service.EmailService;
-import com.kossyuzokwe.fantasy.service.TeamService;
 import com.kossyuzokwe.fantasy.service.UserService;
 import com.kossyuzokwe.fantasy.util.Helpers;
 
@@ -47,9 +45,6 @@ public class UserController {
 	private UserService userService;
 
 	@Autowired
-	private TeamService teamService;
-
-	@Autowired
 	private EmailService emailService;
 
     @Autowired
@@ -59,27 +54,10 @@ public class UserController {
 	public User constructUser() {
 		return new User();
 	}
-
-	@ModelAttribute("team")
-	public Team constructTeam() {
-		return new Team();
-	}
 	
 	@ModelAttribute("passwordChange")
 	public PasswordChange constructPasswordChange() {
 		return new PasswordChange();
-	}
-
-	@RequestMapping(value = "/account", method = RequestMethod.POST)
-	public String createTeam(Model model,
-			@Valid @ModelAttribute("team") Team team, Principal principal,
-			BindingResult result) {
-		if (result.hasErrors()) {
-			return account(model, principal);
-		}
-		String name = principal.getName();
-		teamService.save(team, name);
-		return "redirect:/account.html";
 	}
 
 	@RequestMapping("/signup")

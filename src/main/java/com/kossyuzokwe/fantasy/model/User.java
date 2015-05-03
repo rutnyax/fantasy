@@ -157,8 +157,8 @@ public class User {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("User [userName=").append(userName).append("]")
-				.append("[userEmail=").append(userEmail).append("]");
+		builder.append("User {name=").append(userName).append(", ")
+				.append("email=").append(userEmail).append("}");
 		return builder.toString();
 	}
 
