@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -23,6 +24,8 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+import com.kossyuzokwe.fantasy.validation.UniqueLeagueName;
+
 @Entity
 @Table(name = "`league`")
 public class League {
@@ -33,8 +36,11 @@ public class League {
 	@Column(name = "league_id")
 	private String leagueId;
 
-	@Column(name = "league_name")
+	@Column(name = "league_name", unique=true)
+	@UniqueLeagueName(message = "League name already exists.")
 	private String leagueName;
+
+	private String passcode;
 
 	@ManyToOne(targetEntity = User.class, fetch = FetchType.EAGER)
 	@JoinColumn(nullable = false, name = "user_id")
@@ -58,6 +64,7 @@ public class League {
 	public League() {
 		super();
 		this.members = new ArrayList<User>();
+		this.passcode = UUID.randomUUID().toString();
 		this.createdAt = new Timestamp(new Date().getTime());
 	}
 
@@ -65,6 +72,7 @@ public class League {
 		super();
 		this.leagueName = leagueName;
 		this.members = new ArrayList<User>();
+		this.passcode = UUID.randomUUID().toString();
 		this.createdAt = new Timestamp(new Date().getTime());
 	}
 
@@ -72,7 +80,8 @@ public class League {
 		super();
 		this.leagueName = leagueName;
 		this.owner = owner;
-		this.members = Arrays.asList(owner);
+		this.members = new ArrayList<User>();
+		this.passcode = UUID.randomUUID().toString();
 		this.createdAt = new Timestamp(new Date().getTime());
 	}
 
@@ -130,5 +139,27 @@ public class League {
 
 	public void setPlayers(List<Player> players) {
 		this.players = players;
+	}
+
+	public String getPasscode() {
+		return passcode;
+	}
+
+	public void setPasscode(String passcode) {
+		this.passcode = passcode;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("League {id=").append(leagueId).append(", name=")
+				.append(leagueName).append(", owner=").append(owner);
+		if (members.isEmpty()) {
+			sb.append(", members=").append("EMPTY").append("}");
+		} else {
+			sb.append(", members=").append(Arrays.toString(members.toArray()))
+					.append("}");
+		}
+		return sb.toString();
 	}
 }
