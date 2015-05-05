@@ -202,7 +202,7 @@
 			</div>
 			<footer class="major">
 				<ul class="actions">
-					<li><a href="#" class="button">Magna sed feugiat</a></li>
+					<li><a href='<spring:url value="/signup.html" />' class="button">Sign up now</a></li>
 				</ul>
 			</footer>
 		</div>
