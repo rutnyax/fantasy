@@ -63,10 +63,9 @@
 	<section id="banner">
 		<div class="content">
 			<header>
-				<h2>The future has landed</h2>
+				<h2>The future is here</h2>
 				<p>
-					And there are no hoverboards or flying cars.<br /> Just apps. Lots
-					of mother flipping apps.
+					With a better way to play fantasy football.
 				</p>
 			</header>
 			<span class="image"><img
@@ -86,23 +85,19 @@
 				<div class="row">
 					<div class="4u 12u$(medium)">
 						<header>
-							<h2>Odio faucibus ipsum integer consequat</h2>
-							<p>Nascetur eu nibh vestibulum amet gravida nascetur praesent</p>
+							<h2>Control</h2>
+							<p>Complete control</p>
 						</header>
 					</div>
 					<div class="4u 12u$(medium)">
-						<p>Feugiat accumsan lorem eu ac lorem amet sed accumsan donec.
-							Blandit orci porttitor semper. Arcu phasellus tortor enim mi nisi
-							praesent dolor adipiscing. Integer mi sed nascetur cep aliquet
-							augue varius tempus lobortis porttitor accumsan consequat
-							adipiscing lorem dolor.</p>
+						<p>
+							You decide... <br>how your league will be structured.<br>what
+							your league will be called.<br>how many teams will join your
+							league.<br>who joins your league.
+						</p>
 					</div>
 					<div class="4u$ 12u$(medium)">
-						<p>Morbi enim nascetur et placerat lorem sed iaculis neque
-							ante adipiscing adipiscing metus massa. Blandit orci porttitor
-							semper. Arcu phasellus tortor enim mi mi nisi praesent
-							adipiscing. Integer mi sed nascetur cep aliquet augue varius
-							tempus. Feugiat lorem ipsum dolor nullam.</p>
+						<p><br>The power is yours. <br>Wield it responsibly.</p>
 					</div>
 				</div>
 			</div>
@@ -117,16 +112,16 @@
 			alt="" /></span>
 		<div class="content">
 			<header>
-				<h2>Interdum amet non magna accumsan</h2>
-				<p>Nunc commodo accumsan eget id nisi eu col volutpat magna</p>
+				<h2>No player duplication</h2>
+				<p>There is only one <em>Leo</em></p>
 			</header>
-			<p>Feugiat accumsan lorem eu ac lorem amet ac arcu phasellus
-				tortor enim mi mi nisi praesent adipiscing. Integer mi sed nascetur
-				cep aliquet augue varius tempus lobortis porttitor lorem et accumsan
-				consequat adipiscing lorem.</p>
-			<ul class="actions">
-				<li><a href="#" class="button">Learn More</a></li>
-			</ul>
+			<p>Players are not duplicated in real life. So why should you and
+				your friend both have Messi on your respective teams in the same
+				league?</p>
+			<p>By incorporating a player draft system with the traditional
+				transfer market we all love, you get the realistic experience of
+				hunting for players to sign up to your team and putting your
+				inconsistent players on the market.</p>
 		</div>
 		<a href="#three" class="goto-next scrolly">Next</a>
 	</section>
@@ -138,16 +133,16 @@
 			alt="" /></span>
 		<div class="content">
 			<header>
-				<h2>Interdum felis blandit praesent sed augue</h2>
-				<p>Accumsan integer ultricies aliquam vel massa sapien phasellus</p>
+				<h2>New ways to score</h2>
+				<p>Every fantasy fixture is almost real</p>
 			</header>
-			<p>Feugiat accumsan lorem eu ac lorem amet ac arcu phasellus
-				tortor enim mi mi nisi praesent adipiscing. Integer mi sed nascetur
-				cep aliquet augue varius tempus lobortis porttitor lorem et accumsan
-				consequat adipiscing lorem.</p>
-			<ul class="actions">
-				<li><a href="#" class="button">Learn More</a></li>
-			</ul>
+			<p>We give you a completely new experience in scoring points.
+				Each fantasy fixture is modeled after a real world fixture where
+				each player's efforts in creating or preventing goals drives the
+				team towards victory.</p>
+			<p>Each player's score contributes to your team's final tally
+				which is a round score just like each real life goal scored. The
+				team that outscores its opponent wins. Sound familiar?</p>
 		</div>
 		<a href="#four" class="goto-next scrolly">Next</a>
 	</section>
@@ -156,29 +151,29 @@
 	<section id="four" class="wrapper style1 special fade-up">
 		<div class="container">
 			<header class="major">
-				<h2>Accumsan sed tempus adipiscing blandit</h2>
-				<p>Iaculis ac volutpat vis non enim gravida nisi faucibus
-					posuere arcu consequat</p>
+				<h2>Experience the revolution in fantasy football</h2>
+				<p>Once you start you'll wonder how you ever played any other way</p>
 			</header>
 			<div class="box alt">
 				<div class="row uniform">
 					<section class="4u 6u(medium) 12u$(xsmall)">
 						<span class="icon alt major fa-area-chart"></span>
-						<h3>Ipsum sed commodo</h3>
-						<p>Feugiat accumsan lorem eu ac lorem amet accumsan donec.
-							Blandit orci porttitor.</p>
+						<h3>Live trading</h3>
+						<p>Bid on available players and beat out all contenders for
+							that player you believe holds the key to the season's success.</p>
 					</section>
 					<section class="4u 6u$(medium) 12u$(xsmall)">
-						<span class="icon alt major fa-comment"></span>
-						<h3>Eleifend lorem ornare</h3>
-						<p>Feugiat accumsan lorem eu ac lorem amet accumsan donec.
-							Blandit orci porttitor.</p>
+						<span class="icon alt major fa-bullhorn"></span>
+						<h3>Bragging rights</h3>
+						<p>Battle it out with your friends and show them that you have
+							the best managerial talent in the group.</p>
 					</section>
 					<section class="4u$ 6u$(medium) 12u$(xsmall)">
 						<span class="icon alt major fa-lock"></span>
-						<h3>Massa arcu accumsan</h3>
-						<p>Feugiat accumsan lorem eu ac lorem amet accumsan donec.
-							Blandit orci porttitor.</p>
+						<h3>Private leagues</h3>
+						<p>Leave behind the days of being just another username on
+							global leaderbaords. We let you create private leagues for you
+							and your friends.</p>
 					</section>
 				</div>
 			</div>
