@@ -9,15 +9,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 <title><tiles:getAsString name="title" /></title>
 
 <link rel="icon" href='<spring:url value="/favicon.ico" />'>
 <link rel="stylesheet" href='<spring:url value="/resources/landing/css/skel.css" />'>
 <link rel="stylesheet" href='<spring:url value="/resources/landing/css/style.css" />'>
-<%-- 		<link rel="stylesheet" href='<spring:url value="/resources/landing/css/style-xlarge.css" />'> --%>
-<%-- 		<link rel="stylesheet" href='<spring:url value="/resources/landing/css/style-large.css" />'> --%>
-<%-- 		<link rel="stylesheet" href='<spring:url value="/resources/landing/css/style-medium.css" />'> --%>
 
 <script type="text/javascript">
 	var override = {
@@ -30,7 +26,9 @@
 	}
 </script>
 
-<!--[if lte IE 8]><script src='<spring:url value="/resources/landing/css/ie/html5shiv.js" />'></script><![endif]-->
+<!--[if lte IE 8]>
+	<script src='<spring:url value="/resources/landing/css/ie/html5shiv.js" />'></script>
+<![endif]-->
 <script src='<spring:url value="/resources/landing/js/jquery.min.js" />'></script>
 <script src='<spring:url value="/resources/landing/js/jquery.scrolly.min.js" />'></script>
 <script src='<spring:url value="/resources/landing/js/jquery.dropotron.min.js" />'></script>
@@ -38,8 +36,12 @@
 <script src='<spring:url value="/resources/landing/js/skel.min.js" />'></script>
 <script src='<spring:url value="/resources/landing/js/skel-layers.min.js" />'></script>
 <script src='<spring:url value="/resources/landing/js/init.js" />'></script>
-<!--[if lte IE 9]><link rel="stylesheet" href='<spring:url value="/resources/landing/css/ie/v9.css" />' /><![endif]-->
-<!--[if lte IE 8]><link rel="stylesheet" href='<spring:url value="/resources/landing/css/ie/v8.css" />' /><![endif]-->
+<!--[if lte IE 9]>
+	<link rel="stylesheet" href='<spring:url value="/resources/landing/css/ie/v9.css" />' />
+<![endif]-->
+<!--[if lte IE 8]>
+	<link rel="stylesheet" href='<spring:url value="/resources/landing/css/ie/v8.css" />' />
+<![endif]-->
 </head>
 <body class="landing">
 
