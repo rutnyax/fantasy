@@ -174,24 +174,6 @@
 						<p>Feugiat accumsan lorem eu ac lorem amet accumsan donec.
 							Blandit orci porttitor.</p>
 					</section>
-					<section class="4u$ 6u(medium) 12u$(xsmall)">
-						<span class="icon alt major fa-flask"></span>
-						<h3>Cubilia cep lobortis</h3>
-						<p>Feugiat accumsan lorem eu ac lorem amet accumsan donec.
-							Blandit orci porttitor.</p>
-					</section>
-					<section class="4u 6u$(medium) 12u$(xsmall)">
-						<span class="icon alt major fa-paper-plane"></span>
-						<h3>Non semper interdum</h3>
-						<p>Feugiat accumsan lorem eu ac lorem amet accumsan donec.
-							Blandit orci porttitor.</p>
-					</section>
-					<section class="4u 6u(medium) 12u$(xsmall)">
-						<span class="icon alt major fa-file"></span>
-						<h3>Odio laoreet accumsan</h3>
-						<p>Feugiat accumsan lorem eu ac lorem amet accumsan donec.
-							Blandit orci porttitor.</p>
-					</section>
 					<section class="4u$ 6u$(medium) 12u$(xsmall)">
 						<span class="icon alt major fa-lock"></span>
 						<h3>Massa arcu accumsan</h3>
@@ -205,28 +187,6 @@
 					<li><a href='<spring:url value="/signup.html" />' class="button">Sign up now</a></li>
 				</ul>
 			</footer>
-		</div>
-	</section>
-
-	<!-- Five -->
-	<section id="five" class="wrapper style2 special fade">
-		<div class="container">
-			<header>
-				<h2>Magna faucibus lorem diam</h2>
-				<p>Ante metus praesent faucibus ante integer id accumsan
-					eleifend</p>
-			</header>
-			<form method="post" action="#" class="container 50%">
-				<div class="row uniform 50%">
-					<div class="8u 12u$(xsmall)">
-						<input type="email" name="email" id="email"
-							placeholder="Your Email Address" />
-					</div>
-					<div class="4u$ 12u$(xsmall)">
-						<input type="submit" value="Get Started" class="fit special" />
-					</div>
-				</div>
-			</form>
 		</div>
 	</section>
 
