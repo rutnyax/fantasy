@@ -1,28 +1,12 @@
-/* default.jsp - Fixed navbar
--------------------------------------------------- */
-body {
-	padding-top: 70px;
-}
-
-/* footer.jsp - Sticky footer
--------------------------------------------------- */
 html {
 	position: relative;
 	min-height: 100%;
 }
 
 body {
+	padding-top: 70px;
 	/* Margin bottom by footer height */
 	margin-bottom: 60px;
-}
-
-.footer {
-	position: absolute;
-	bottom: 0;
-	width: 100%;
-	/* Set the fixed height of the footer here */
-	height: 60px;
-	background-color: #f5f5f5;
 }
 
 /* signin.jsp
@@ -80,4 +64,13 @@ body {
 	margin-bottom: 10px;
 	border-top-left-radius: 0;
 	border-top-right-radius: 0;
+}
+
+.footer {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	/* Set the fixed height of the footer here */
+	height: 60px;
+	background-color: #f5f5f5;
 }
