@@ -68,7 +68,7 @@
 				</p>
 			</header>
 			<span class="image"><img
-				src='<spring:url value="/resources/landing/images/pic01.jpg" />'
+				src='<spring:url value="/resources/landing/images/eden-hazard.png" />'
 				alt="" /></span>
 		</div>
 		<a href="#one" class="goto-next scrolly">Next</a>
@@ -77,7 +77,7 @@
 	<!-- One -->
 	<section id="one" class="spotlight style1 bottom">
 		<span class="image fit main"><img
-			src='<spring:url value="/resources/landing/images/pic02.jpg" />'
+			src='<spring:url value="/resources/landing/images/gareth-bale.png" />'
 			alt="" /></span>
 		<div class="content">
 			<div class="container">
@@ -111,7 +111,7 @@
 	<!-- Two -->
 	<section id="two" class="spotlight style2 right">
 		<span class="image fit main"><img
-			src='<spring:url value="/resources/landing/images/pic03.jpg" />'
+			src='<spring:url value="/resources/landing/images/lionel-messi.png" />'
 			alt="" /></span>
 		<div class="content">
 			<header>
@@ -132,7 +132,7 @@
 	<!-- Three -->
 	<section id="three" class="spotlight style3 left">
 		<span class="image fit main bottom"><img
-			src='<spring:url value="/resources/landing/images/pic04.jpg" />'
+			src='<spring:url value="/resources/landing/images/cristiano-ronaldo.png" />'
 			alt="" /></span>
 		<div class="content">
 			<header>
